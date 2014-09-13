@@ -24,6 +24,8 @@
 
 @property (nonatomic) double cur_phi, cur_theta, cur_orientation;
 
+@property (nonatomic) bool dont_collect;
+
 @end
 
 @implementation ViewController
@@ -37,6 +39,8 @@
     self.orientationSolver.delegate = self;
     self.view.delegate = self;
     self.pathArray = [NSMutableArray new];
+    
+    self.dont_collect = false;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,6 +59,8 @@
     self.currentLine = newLine;
     [self.view addSubview:newLine];
     [self.pathArray addObject:newLine];
+    
+    self.dont_collect = true;
 }
 
 -(void)scratchPadView:(ScratchPadView *) view touchesMoved:(NSSet *) touches withEvent:(UIEvent *)event{
@@ -62,6 +68,8 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
+    
+    self.dont_collect = true;
 }
 
 -(void)scratchPadView:(ScratchPadView *)view touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -69,6 +77,8 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
+    
+    self.dont_collect = false;
 }
 
 -(void)socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
@@ -109,13 +119,16 @@
 
 -(void)OrientationSolver:(OrientationSolver *)solver didReceiveNewAccelerometerDataWithTheta:(double)theta andPhi:(double)phi andOrientation:(double)orientation
 {
-    self.cur_theta = theta;
-    self.cur_phi = phi;
-    self.cur_orientation = orientation;
+    if (!self.dont_collect) {
+        self.cur_theta = theta;
+        self.cur_phi = phi;
+        self.cur_orientation = orientation;
+    }
     for( ScratchPadLineView * path in self.pathArray) {
         [path setNeedsDisplay];
     }
 }
+
 
 #pragma mark - ScratchPadLineViewDelegate
 -(void)scratchPadLineView:(ScratchPadLineView *)view currentPhi:(double *)phi currentTheta:(double *)theta currentOrientiation:(double *)orientation
