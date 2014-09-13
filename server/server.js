@@ -14,7 +14,7 @@ var Drawing = mongoose.model('drawing', new mongoose.Schema({
 
 clients = {};
 
-var io = require('socket.io').listen(42069, {log: true});
+var io = require('socket.io').listen(42069, {log: false});
 io.sockets.on('connection', function (socket) {
 	socket.on('subscribe', function(data){
 		socket.join(data.channel);
@@ -30,7 +30,9 @@ io.sockets.on('connection', function (socket) {
 				clients[client].getdrawings(data, false);
 		}
 
-		var drawing = new Drawing({'channel': socket['session'].channel, 'owner': socket.session['uid'], 'points': data.points});
+		var drawing = new Drawing({'channel': socket['session'].channel, 
+								   'owner': socket.session['uid'], 
+								   'points': data.points});
 
 		drawing.save(function (err) {
 		  if (err) {
