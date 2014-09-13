@@ -34,6 +34,7 @@
 +(CGPoint) xYToDB:(CGPoint) point givenPhi:(double) phi
             theta:(double) theta andOrientation:(double) orientation {
     CGPoint pt = [conversion stCenterCoordinate:point];
+    pt.x = -pt.x;
     double counterClockwise =  90.0 - orientation;
     double x = pt.x*cos(counterClockwise/RADS_TO_DEGREES) - pt.y*sin(counterClockwise/RADS_TO_DEGREES);
     pt.y = pt.x*sin(counterClockwise/RADS_TO_DEGREES) + pt.y*cos(counterClockwise/RADS_TO_DEGREES);
@@ -56,7 +57,7 @@
     double counterClockwise = 270.0 + orientation;
     double x = pt.x*cos(counterClockwise/RADS_TO_DEGREES) - pt.y*sin(counterClockwise/RADS_TO_DEGREES);
     pt.y = pt.x*sin(counterClockwise/RADS_TO_DEGREES) + pt.y*cos(counterClockwise/RADS_TO_DEGREES);
-    pt.x = x;
+    pt.x = -x;
     return [conversion getXYCoordinate:pt];
 }
 

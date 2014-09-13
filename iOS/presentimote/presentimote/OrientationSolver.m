@@ -9,7 +9,7 @@
 #import "OrientationSolver.h"
 
 #define RADS_TO_DEGREES 57.2957795
-#define K 0.92
+#define K 0.96
 
 @interface OrientationSolver ()
 
