@@ -9,13 +9,13 @@
 #import "OrientationSolver.h"
 
 #define RADS_TO_DEGREES 57.2957795
-#define K 0.96
+#define K 0.94
 
 @interface OrientationSolver ()
 
-@property (strong, nonatomic) CMMotionManager *motionManager;
-@property (nonatomic) CLLocationManager * locationManager;
-@property (nonatomic) CLLocationDirection currentHeading;
+@property (strong, nonatomic) CMMotionManager * _motionManager;
+@property (nonatomic) CLLocationManager * _locationManager;
+@property (nonatomic) CLLocationDirection _currentHeading;
 @property (nonatomic) double originalOrientation;
 @property (nonatomic) NSTimer * headerTimer;
 
@@ -24,8 +24,6 @@
 double avgX;
 double avgY;
 double avgZ;
-
-double heading = 0;
 
 //double phi_;
 //double theta_;
@@ -40,14 +38,14 @@ double theta_top;
     if (self) {
 //        [self initializeArrays];
         
-        self.motionManager = [[CMMotionManager alloc] init];
-        self.motionManager.accelerometerUpdateInterval = .1;
+        self._motionManager = [[CMMotionManager alloc] init];
+        self._motionManager.accelerometerUpdateInterval = 1.0/60.0;
         
-        self.locationManager = [CLLocationManager new];
-        self.locationManager.delegate = self;
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self._locationManager = [CLLocationManager new];
+        self._locationManager.delegate = self;
+        self._locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         
-        [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+        [self._motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
                                                  withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
                                                      [self calculateAccelertionData:accelerometerData.acceleration];
                                                      if(error){
@@ -55,21 +53,9 @@ double theta_top;
                                                      }
                                                  }];
         
-        if ([CLLocationManager locationServicesEnabled]) {
-            self.headerTimer = [NSTimer scheduledTimerWithTimeInterval: 0.02
-                                                           target:self
-                                                         selector:@selector(handleTimer:)
-                                                         userInfo:nil
-                                                          repeats:YES];
-        }
+        [self._locationManager startUpdatingHeading];
     }
     return self;
-}
-
--(void) handleTimer:(id) sender
-{
-        [self.locationManager startUpdatingHeading];
-    
 }
 
 //- (void) initializeArrays {
@@ -122,7 +108,7 @@ double theta_top;
     // Compute phi
     double phi = atan(avgZ/pow(pow(avgX, 2.0)+pow(avgY, 2.0), 0.5))*RADS_TO_DEGREES;
     // Compute theta
-    double theta = heading - _originalOrientation;
+    double theta = self._currentHeading - _originalOrientation;
     {
         if (phi < -45.0) {
             theta += 180.0;
@@ -152,7 +138,7 @@ double theta_top;
         phi = -45.0;
     }
     
-    double orientation = self.currentHeading - _originalOrientation - theta;
+    double orientation = self._currentHeading - _originalOrientation - theta;
     [self.delegate OrientationSolver:self didReceiveNewAccelerometerDataWithTheta:theta andPhi:phi andOrientation:orientation];
 //    phi_ = phi;
 //    theta_ = theta;
@@ -162,7 +148,7 @@ double theta_top;
 //    andOrientation:(double *)orientation {
 //    *phi = phi_;
 //    *theta = theta_;
-//    *orientation = self.currentHeading - _originalOrientation - theta_;
+//    *orientation = self._currentHeading - _originalOrientation - theta_;
 //    NSLog(@"%@",[NSString stringWithFormat:@"Phi: %.2f",phi_]);
 //    NSLog(@"%@",[NSString stringWithFormat:@"Theta: %.2f",theta_]);
 //}
@@ -176,11 +162,7 @@ double theta_top;
             
         }
     }
-    self.currentHeading = newHeading.trueHeading;
-    if (heading == 0) {
-        heading = self.currentHeading;
-    }
-    heading = K * heading + (1.0 - K) * self.currentHeading;
+    self._currentHeading = newHeading.trueHeading;
 }
 
 @end
