@@ -16,14 +16,13 @@
 
 @property (nonatomic) SocketIO *socketIO;
 
-@property (weak, nonatomic) IBOutlet UIButton * leftButton;
-@property (weak, nonatomic) IBOutlet UIButton * rightButton;
-@property (weak, nonatomic) IBOutlet UIButton * cameraButton;
 @property (weak, nonatomic) IBOutlet ScratchPadView * view;
 @property (weak, nonatomic) ScratchPadLineView * currentLine;
 
 @property (nonatomic) NSMutableArray * pathArray;
 @property (nonatomic) OrientationSolver * orientationSolver;
+
+@property (nonatomic) double cur_phi, cur_theta, cur_orientation;
 
 @end
 
@@ -35,6 +34,7 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     self.orientationSolver = [[OrientationSolver alloc ] init];
+    self.orientationSolver.delegate = self;
     self.view.delegate = self;
     self.pathArray = [NSMutableArray new];
     self.socketIO = [[SocketIO alloc]initWithDelegate:self];
@@ -52,6 +52,7 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     ScratchPadLineView * newLine = [[ScratchPadLineView alloc]initWithFrame:self.view.frame];
+    newLine.delegate = self;
     
     [newLine addPointWithX:touchLocation.x andY:touchLocation.y];
     self.currentLine = newLine;
@@ -107,4 +108,23 @@
     NSLog(@"SocketIO error: %@", error);
 }
 
+#pragma mark - OrientationSolver
+
+-(void)OrientationSolver:(OrientationSolver *)solver didReceiveNewAccelerometerDataWithTheta:(double)theta andPhi:(double)phi andOrientation:(double)orientation
+{
+    self.cur_theta = theta;
+    self.cur_phi = phi;
+    self.cur_orientation = orientation;
+    for( ScratchPadLineView * path in self.pathArray) {
+        [path setNeedsDisplay];
+    }
+}
+
+#pragma mark - ScratchPadLineViewDelegate
+-(void)scratchPadLineView:(ScratchPadLineView *)view currentPhi:(double *)phi currentTheta:(double *)theta currentOrientiation:(double *)orientation
+{
+    *phi = self.cur_phi;
+    *theta = self.cur_theta;
+    *orientation = self.cur_orientation;
+}
 @end
