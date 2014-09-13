@@ -39,7 +39,7 @@ double theta_top;
 //        [self initializeArrays];
         
         self.motionManager = [[CMMotionManager alloc] init];
-        self.motionManager.accelerometerUpdateInterval = .02;
+        self.motionManager.accelerometerUpdateInterval = .1;
         
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
@@ -67,7 +67,6 @@ double theta_top;
 -(void) handleTimer:(id) sender
 {
         [self.locationManager startUpdatingHeading];
-        [self.locationManager stopUpdatingHeading];
     
 }
 
@@ -171,14 +170,12 @@ double theta_top;
     if (!_originalOrientation) {
         if (newHeading.trueHeading == 0) {
         } else {
-            
-//            NSLog(@"\n\n\n\n\n%f\n\n\n\n\n\n", newHeading.trueHeading);
-            
             _originalOrientation = newHeading.trueHeading;
             
         }
     }
     self.currentHeading = newHeading.trueHeading;
+    [self.locationManager stopUpdatingHeading];
 }
 
 @end
