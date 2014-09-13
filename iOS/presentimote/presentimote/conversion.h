@@ -12,6 +12,8 @@
 
 +(CGPoint) stCenterCoordinate:(CGPoint) point;
 
++(CGPoint) getXYCoordinate:(CGPoint) point;
+
 +(CGPoint) xYToDB:(CGPoint) pt givenPhi:(double) phi
             theta:(double) theta andOrientation:(double) orientation;
 

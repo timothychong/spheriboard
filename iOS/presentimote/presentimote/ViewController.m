@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ScratchPadLineView.h"
 #import "OrientationSolver.h"
+#import "conversion.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton * leftButton;
@@ -30,6 +31,9 @@
     self.orientationSolver = [[OrientationSolver alloc ] init];
     self.view.delegate = self;
     self.pathArray = [NSMutableArray new];
+    
+    CGPoint db = [conversion xYToDB:CGPointMake(93,359) givenPhi:45 theta:180 andOrientation:90];
+    CGPoint xy = [conversion dBToXY:db givenPhi:45 theta:180 andOrientation:90];
 }
 
 - (void)didReceiveMemoryWarning {
