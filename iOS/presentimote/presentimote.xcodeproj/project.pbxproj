@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1EBB4E5819C4529600525E10 /* OrientationSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB4E5719C4529600525E10 /* OrientationSolver.m */; };
 		1EBB4E5919C4529600525E10 /* OrientationSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB4E5719C4529600525E10 /* OrientationSolver.m */; };
+		C6CF63316FDE43BA8BE0FED7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 627B2F2DE1614089B4E06221 /* libPods.a */; };
+		FD26E69519C48F4800844C28 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD26E69419C48F4800844C28 /* PersistenceManager.m */; };
 		FDA0DCE019C417290041B3F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCDF19C417290041B3F7 /* main.m */; };
 		FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE219C417290041B3F7 /* AppDelegate.m */; };
 		FDA0DCE619C417290041B3F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE519C417290041B3F7 /* ViewController.m */; };
@@ -34,6 +36,11 @@
 /* Begin PBXFileReference section */
 		1EBB4E5619C4529600525E10 /* OrientationSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationSolver.h; sourceTree = "<group>"; };
 		1EBB4E5719C4529600525E10 /* OrientationSolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationSolver.m; sourceTree = "<group>"; };
+		627B2F2DE1614089B4E06221 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		686BF1F17B23469B9DBFD905 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		FD26E69319C48F4800844C28 /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceManager.h; sourceTree = "<group>"; };
+		FD26E69419C48F4800844C28 /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceManager.m; sourceTree = "<group>"; };
+		FD26E69719C4A2D100844C28 /* global_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global_header.h; sourceTree = "<group>"; };
 		FDA0DCDA19C417290041B3F7 /* presentimote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = presentimote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDA0DCDE19C417290041B3F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDA0DCDF19C417290041B3F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -60,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6CF63316FDE43BA8BE0FED7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,12 +81,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D70043817CA4F0798AC7A33 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				627B2F2DE1614089B4E06221 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FDA0DCD119C417290041B3F7 = {
 			isa = PBXGroup;
 			children = (
 				FDA0DCDC19C417290041B3F7 /* presentimote */,
 				FDA0DCF619C417290041B3F7 /* presentimoteTests */,
 				FDA0DCDB19C417290041B3F7 /* Products */,
+				686BF1F17B23469B9DBFD905 /* Pods.xcconfig */,
+				1D70043817CA4F0798AC7A33 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,8 +122,11 @@
 				FDC549FA19C43CD9009A7E11 /* Category */,
 				FDC549ED19C42F7E009A7E11 /* Views */,
 				FDA0DCE719C417290041B3F7 /* Main.storyboard */,
+				FD26E69319C48F4800844C28 /* PersistenceManager.h */,
+				FD26E69419C48F4800844C28 /* PersistenceManager.m */,
 				FDA0DCEA19C417290041B3F7 /* Images.xcassets */,
 				FDA0DCEC19C417290041B3F7 /* LaunchScreen.xib */,
+				FD26E69719C4A2D100844C28 /* global_header.h */,
 				FDA0DCDD19C417290041B3F7 /* Supporting Files */,
 			);
 			path = presentimote;
@@ -171,9 +192,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDA0DCFD19C4172A0041B3F7 /* Build configuration list for PBXNativeTarget "presentimote" */;
 			buildPhases = (
+				69E88A3B285E4ECC95B3DB9F /* Check Pods Manifest.lock */,
 				FDA0DCD619C417290041B3F7 /* Sources */,
 				FDA0DCD719C417290041B3F7 /* Frameworks */,
 				FDA0DCD819C417290041B3F7 /* Resources */,
+				BEA3610A8A8D4722BD804CF4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,6 +282,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		69E88A3B285E4ECC95B3DB9F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BEA3610A8A8D4722BD804CF4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FDA0DCD619C417290041B3F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -271,6 +327,7 @@
 				FDC549F619C43AF1009A7E11 /* conversion.m in Sources */,
 				FDA0DCE019C417290041B3F7 /* main.m in Sources */,
 				FDC549E919C42263009A7E11 /* ScratchPadLineView.m in Sources */,
+				FD26E69519C48F4800844C28 /* PersistenceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,23 +448,27 @@
 		};
 		FDA0DCFE19C4172A0041B3F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 686BF1F17B23469B9DBFD905 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = presentimote/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		FDA0DCFF19C4172A0041B3F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 686BF1F17B23469B9DBFD905 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = presentimote/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

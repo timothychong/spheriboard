@@ -9,12 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
+@class OrientationSolver;
 
-@interface OrientationSolver : NSObject<CLLocationManagerDelegate>
+@protocol OrientationSolverDelegate <NSObject>
+
+-(void) OrientationSolver:(OrientationSolver *) solver didReceiveNewAccelerometerDataWithTheta:(double) theta andPhi:(double) phi andOrientation:(double) orientation;
+
+@end
+
+@interface OrientationSolver : NSObject <CLLocationManagerDelegate>
+
+@property (nonatomic, weak) id <OrientationSolverDelegate> delegate;
 
 - (void) calculateAccelertionData:(CMAcceleration)acceleration;
 
-- (void) getAccelerationDataPhi:(double*)phi andTheta:(double*)theta
-                 andOrientation:(double*)orientation;
+//- (void) getAccelerationDataPhi:(double*)phi andTheta:(double*)theta
+//                 andOrientation:(double*)orientation;
 
 @end
