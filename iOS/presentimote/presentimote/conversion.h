@@ -10,6 +10,12 @@
 
 @interface conversion : NSObject
 
-+(CGPoint) stCenterCoordinate:(CGPoint) pt;
++(CGPoint) stCenterCoordinate:(CGPoint) point;
+
++(CGPoint) xYToDB:(CGPoint) pt givenPhi:(double) phi
+            theta:(double) theta andOrientation:(double) orientation;
+
++(CGPoint) dBToXY:(CGPoint) pt givenPhi:(double) phi
+            theta:(double) theta andOrientation:(double) orientation;
 
 @end

@@ -128,6 +128,11 @@ double theta_top;
     while (theta < 0.0) {
         theta += 360.0;
     }
+    if (phi_ > 45.0) {
+        phi_ = 45.0;
+    } else if (phi_ < -45.0) {
+        phi_ = -45.0;
+    }
     phi_ = phi;
     theta_ = theta;
 }
