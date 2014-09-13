@@ -15,5 +15,6 @@
 }
 
 -(void) addPointWithX: (float) x andY: (float) y;
+-(void)setPath:(NSMutableArray *)array;
 
 @end

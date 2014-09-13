@@ -51,4 +51,18 @@
     [self setNeedsDisplay];
 }
 
+-(void)setPath:(NSMutableArray *)array
+{
+    [array enumerateObjectsUsingBlock:^(id value, NSUInteger idx, BOOL *stop) {
+        CGPoint p;
+        [value getValue:&p];
+        path[idx] = p;
+        path_length ++;
+        
+    }];
+    path_length = array.count;
+    [self setNeedsDisplay];
+    
+}
+
 @end

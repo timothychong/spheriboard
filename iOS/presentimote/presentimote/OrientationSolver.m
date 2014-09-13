@@ -50,8 +50,7 @@ double theta_top;
                                                  withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
                                                      [self calculateAccelertionData:accelerometerData.acceleration];
                                                      if(error){
-                                                         
-                                                         NSLog(@"%@", error);
+                                                         NSLog(@"Error in acceleration data: %@", error);
                                                      }
                                                  }];
         
@@ -155,7 +154,7 @@ double theta_top;
         if (newHeading.trueHeading == 0) {
         } else {
             
-            NSLog(@"\n\n\n\n\n%f\n\n\n\n\n\n", newHeading.trueHeading);
+//            NSLog(@"\n\n\n\n\n%f\n\n\n\n\n\n", newHeading.trueHeading);
             
             _originalOrientation = newHeading.trueHeading;
             

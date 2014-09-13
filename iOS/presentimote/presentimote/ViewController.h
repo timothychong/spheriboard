@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ScratchPadView.h"
+#import <socket.IO/SocketIO.h>
 
-@interface ViewController : UIViewController <ScratchPadViewDelegate>
+@interface ViewController : UIViewController <ScratchPadViewDelegate, SocketIODelegate>
 
 
 @end

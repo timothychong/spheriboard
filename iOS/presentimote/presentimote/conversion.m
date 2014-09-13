@@ -62,8 +62,8 @@
         pt.y += phi;
     }
     double magnitude = sqrt(pow(pt.x, 2.0) + pow(pt.y, 2.0));
-    pt.x = magnitude*sin(orientation)*RADS_TO_DEGREES;
-    pt.y = magnitude*cos(orientation)*RADS_TO_DEGREES;
+    pt.x = magnitude * sin(orientation) * RADS_TO_DEGREES;
+    pt.y = magnitude * cos(orientation) * RADS_TO_DEGREES;
     return [conversion getXYCoordinate:pt];
 }
 
