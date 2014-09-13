@@ -1,0 +1,15 @@
+<script src="socket.io.min.js"></script>
+<script>
+var socket = new io.connect('http://54.165.102.139:42069'); 
+
+socket.on('connect',function() {
+    console.log('Client has connected to the server!');
+	socket.emit("subscribe", { channel: 'testing4', 'uid': 'tester' });
+	socket.emit("savedrawing", { channel: 'testing4', 
+		points: [{x:1, y:2}, {x:2, y:3}, {x:1, y:2}, {x:2, y:3}, {x:1, y:2}, {x:2, y:3}, {x:1, y:2}, {x:2, y:3}, {x:1, y:2}, {x:2, y:3} ] });
+});
+
+socket.on('drawing', function(drawing) {
+	console.log(drawing);
+});
+</script>
