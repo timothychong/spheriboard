@@ -9,7 +9,7 @@
 #import "OrientationSolver.h"
 
 #define RADS_TO_DEGREES 57.2957795
-#define K 0.92
+#define K 0.96
 
 @interface OrientationSolver ()
 
@@ -38,7 +38,7 @@ double theta_top;
 //        [self initializeArrays];
         
         self.motionManager = [[CMMotionManager alloc] init];
-        self.motionManager.accelerometerUpdateInterval = .1;
+        self.motionManager.accelerometerUpdateInterval = .02;
         
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;

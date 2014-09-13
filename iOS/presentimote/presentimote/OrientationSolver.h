@@ -17,7 +17,19 @@
 
 @end
 
-@interface OrientationSolver : NSObject <CLLocationManagerDelegate>
+@interface OrientationSolver : NSObject <CLLocationManagerDelegate> {
+    float               oldHeading;
+    float               updatedHeading;
+    float               newYaw;
+    float               oldYaw;
+    float               offsetG;
+    float               updateCompass;
+    float               newCompassTarget;
+    float               currentYaw;
+    float               currentHeading;
+    float               compassDiff;
+    float               northOffest;
+}
 
 @property (nonatomic, weak) id <OrientationSolverDelegate> delegate;
 
