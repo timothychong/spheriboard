@@ -25,6 +25,8 @@ double avgX;
 double avgY;
 double avgZ;
 
+double heading = 0;
+
 //double phi_;
 //double theta_;
 double phi_top;
@@ -54,7 +56,7 @@ double theta_top;
                                                  }];
         
         if ([CLLocationManager locationServicesEnabled]) {
-            self.headerTimer = [NSTimer scheduledTimerWithTimeInterval: 0.01
+            self.headerTimer = [NSTimer scheduledTimerWithTimeInterval: 0.02
                                                            target:self
                                                          selector:@selector(handleTimer:)
                                                          userInfo:nil
@@ -121,7 +123,7 @@ double theta_top;
     // Compute phi
     double phi = atan(avgZ/pow(pow(avgX, 2.0)+pow(avgY, 2.0), 0.5))*RADS_TO_DEGREES;
     // Compute theta
-    double theta = self.currentHeading - _originalOrientation;
+    double theta = heading - _originalOrientation;
     {
         if (phi < -45.0) {
             theta += 180.0;
@@ -179,6 +181,10 @@ double theta_top;
         }
     }
     self.currentHeading = newHeading.trueHeading;
+    if (heading == 0) {
+        heading = self.currentHeading;
+    }
+    heading = K * heading + (1.0 - K) * self.currentHeading;
 }
 
 @end
