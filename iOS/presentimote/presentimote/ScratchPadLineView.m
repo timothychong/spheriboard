@@ -12,6 +12,8 @@
 
 @implementation ScratchPadLineView
 
+@synthesize path_length = path_length;
+
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
@@ -66,6 +68,16 @@
     [self setNeedsDisplay];
 }
 
+-(void) addPointWithDBX: (float) x andY: (float) y {
+    path[path_length].x = x;
+    path[path_length].y = y;
+    path_length ++;
+    if (sizeof(path) / sizeof(path[0]) == path_length) {
+        path_length = 0;
+    }
+    [self setNeedsDisplay];
+}
+
 -(void)setPath:(NSMutableArray *)array
 {
     [array enumerateObjectsUsingBlock:^(id value, NSUInteger idx, BOOL *stop) {
@@ -79,6 +91,11 @@
     path_length = array.count;
     [self setNeedsDisplay];
     
+}
+
+-(CGPoint)getPathAtIndex:(int) index
+{
+    return path[index];
 }
 
 @end
