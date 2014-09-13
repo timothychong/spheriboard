@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ScratchPadView.h"
+#import <socket.IO/SocketIO.h>
+#import "OrientationSolver.h"
+#import "ScratchPadLineView.h"
 
-@interface ViewController : UIViewController <ScratchPadViewDelegate>
+@interface ViewController : UIViewController <ScratchPadViewDelegate, SocketIODelegate, OrientationSolverDelegate, ScratchPadLineViewDelegate>
+
 
 
 @end

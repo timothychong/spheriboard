@@ -7,13 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ScratchPadLineView;
 
+@protocol ScratchPadLineViewDelegate <NSObject>
+
+-(void) scratchPadLineView: (ScratchPadLineView *) view currentPhi:(double *)phi currentTheta:(double *) theta currentOrientiation:(double *) orientation;
+
+@end
 
 @interface ScratchPadLineView : UIView {
-    CGPoint path[1000];
+    CGPoint path[500];
     int path_length;
 }
 
+@property (nonatomic, weak) id <ScratchPadLineViewDelegate> delegate;
+
 -(void) addPointWithX: (float) x andY: (float) y;
+-(void)setPath:(NSMutableArray *)array;
 
 @end
