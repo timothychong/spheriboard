@@ -30,22 +30,19 @@
     return CGPointMake((pt.x + 8.45) * width / 16.9 , (pt.y + 15) * height  / 30);
 }
 
-// Get db read coodinates from xy on phone
+// Get db coodinates from xy on phone
 +(CGPoint) xYToDB:(CGPoint) point givenPhi:(double) phi
             theta:(double) theta andOrientation:(double) orientation {
     CGPoint pt = [conversion stCenterCoordinate:point];
-    double magnitude = sqrt(pow(pt.x, 2.0) + pow(pt.y, 2.0));
-    pt.x = magnitude*sin(orientation)*RADS_TO_DEGREES;
-    pt.y = magnitude*cos(orientation)*RADS_TO_DEGREES;
-    pt.x = pt.x + theta;
+    double counterClockwise =  90.0 - orientation;
+    double x = pt.x*cos(counterClockwise/RADS_TO_DEGREES) - pt.y*sin(counterClockwise/RADS_TO_DEGREES);
+    pt.y = pt.x*sin(counterClockwise/RADS_TO_DEGREES) + pt.y*cos(counterClockwise/RADS_TO_DEGREES);
+    pt.x = x;
+    pt.x += theta;
     if (pt.x > 360.0) {
-        pt.x = pt.x - theta;
+        pt.x -= 360.0;
     }
-    if (phi > 0.0) {
-        pt.y += phi;
-    } else {
-        pt.y -= phi;
-    }
+    pt.y += phi;
     return pt;
 }
 
