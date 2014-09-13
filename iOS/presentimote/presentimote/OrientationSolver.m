@@ -39,7 +39,7 @@ double theta_top;
 //        [self initializeArrays];
         
         self.motionManager = [[CMMotionManager alloc] init];
-        self.motionManager.accelerometerUpdateInterval = .001;
+        self.motionManager.accelerometerUpdateInterval = .02;
         
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
