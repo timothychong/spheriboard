@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  conversion.h
 //  presentimote
 //
 //  Created by Timothy Chong on 9/13/14.
@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScratchPadView.h"
 
-@interface ViewController : UIViewController <ScratchPadViewDelegate>
+@interface conversion : NSObject
 
++(CGPoint) stCenterCoordinate:(CGPoint) pt;
 
 @end
-

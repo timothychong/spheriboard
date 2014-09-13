@@ -14,6 +14,9 @@
 		FDA0DCEB19C417290041B3F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDA0DCEA19C417290041B3F7 /* Images.xcassets */; };
 		FDA0DCEE19C417290041B3F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDA0DCEC19C417290041B3F7 /* LaunchScreen.xib */; };
 		FDA0DCFA19C4172A0041B3F7 /* presentimoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCF919C4172A0041B3F7 /* presentimoteTests.m */; };
+		FDC549E919C42263009A7E11 /* ScratchPadLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC549E819C42263009A7E11 /* ScratchPadLineView.m */; };
+		FDC549EC19C42F5D009A7E11 /* ScratchPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC549EB19C42F5D009A7E11 /* ScratchPadView.m */; };
+		FDC549F619C43AF1009A7E11 /* conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC549F519C43AF1009A7E11 /* conversion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		FDA0DCF319C417290041B3F7 /* presentimoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = presentimoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDA0DCF819C4172A0041B3F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDA0DCF919C4172A0041B3F7 /* presentimoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = presentimoteTests.m; sourceTree = "<group>"; };
+		FDC549E719C42263009A7E11 /* ScratchPadLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchPadLineView.h; sourceTree = "<group>"; };
+		FDC549E819C42263009A7E11 /* ScratchPadLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchPadLineView.m; sourceTree = "<group>"; };
+		FDC549EA19C42F5D009A7E11 /* ScratchPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchPadView.h; sourceTree = "<group>"; };
+		FDC549EB19C42F5D009A7E11 /* ScratchPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchPadView.m; sourceTree = "<group>"; };
+		FDC549F419C43AF1009A7E11 /* conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conversion.h; sourceTree = "<group>"; };
+		FDC549F519C43AF1009A7E11 /* conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = conversion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +92,11 @@
 			children = (
 				FDA0DCE119C417290041B3F7 /* AppDelegate.h */,
 				FDA0DCE219C417290041B3F7 /* AppDelegate.m */,
-				FDA0DCE419C417290041B3F7 /* ViewController.h */,
-				FDA0DCE519C417290041B3F7 /* ViewController.m */,
+				FDC549F419C43AF1009A7E11 /* conversion.h */,
+				FDC549F519C43AF1009A7E11 /* conversion.m */,
+				FDC549EE19C42F86009A7E11 /* View Controller */,
+				FDC549FA19C43CD9009A7E11 /* Category */,
+				FDC549ED19C42F7E009A7E11 /* Views */,
 				FDA0DCE719C417290041B3F7 /* Main.storyboard */,
 				FDA0DCEA19C417290041B3F7 /* Images.xcassets */,
 				FDA0DCEC19C417290041B3F7 /* LaunchScreen.xib */,
@@ -117,6 +129,33 @@
 				FDA0DCF819C4172A0041B3F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FDC549ED19C42F7E009A7E11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FDC549EA19C42F5D009A7E11 /* ScratchPadView.h */,
+				FDC549EB19C42F5D009A7E11 /* ScratchPadView.m */,
+				FDC549E719C42263009A7E11 /* ScratchPadLineView.h */,
+				FDC549E819C42263009A7E11 /* ScratchPadLineView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		FDC549EE19C42F86009A7E11 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FDA0DCE419C417290041B3F7 /* ViewController.h */,
+				FDA0DCE519C417290041B3F7 /* ViewController.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		FDC549FA19C43CD9009A7E11 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +258,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC549EC19C42F5D009A7E11 /* ScratchPadView.m in Sources */,
 				FDA0DCE619C417290041B3F7 /* ViewController.m in Sources */,
 				FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */,
+				FDC549F619C43AF1009A7E11 /* conversion.m in Sources */,
 				FDA0DCE019C417290041B3F7 /* main.m in Sources */,
+				FDC549E919C42263009A7E11 /* ScratchPadLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +454,7 @@
 				FDA0DCFF19C4172A0041B3F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FDA0DD0019C4172A0041B3F7 /* Build configuration list for PBXNativeTarget "presentimoteTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +463,7 @@
 				FDA0DD0219C4172A0041B3F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
