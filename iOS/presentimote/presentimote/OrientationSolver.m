@@ -17,6 +17,7 @@
 @property (nonatomic) CLLocationManager * locationManager;
 @property (nonatomic) CLLocationDirection currentHeading;
 @property (nonatomic) double originalOrientation;
+@property (nonatomic) NSTimer * headerTimer;
 
 @end
 
@@ -38,7 +39,7 @@ double theta_top;
 //        [self initializeArrays];
         
         self.motionManager = [[CMMotionManager alloc] init];
-        self.motionManager.accelerometerUpdateInterval = .1;
+        self.motionManager.accelerometerUpdateInterval = .001;
         
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
@@ -53,10 +54,21 @@ double theta_top;
                                                  }];
         
         if ([CLLocationManager locationServicesEnabled]) {
-            [self.locationManager startUpdatingHeading];
+            self.headerTimer = [NSTimer scheduledTimerWithTimeInterval: 0.01
+                                                           target:self
+                                                         selector:@selector(handleTimer:)
+                                                         userInfo:nil
+                                                          repeats:YES];
         }
     }
     return self;
+}
+
+-(void) handleTimer:(id) sender
+{
+        [self.locationManager startUpdatingHeading];
+        [self.locationManager stopUpdatingHeading];
+    
 }
 
 //- (void) initializeArrays {
@@ -101,6 +113,10 @@ double theta_top;
     avgX = K * avgX + (1.0 - K) * acceleration.x;
     avgY = K * avgY + (1.0 - K) * acceleration.y;
     avgZ = K * avgZ + (1.0 - K) * acceleration.z;
+    
+//    avgX = acceleration.x;
+//    avgY = acceleration.y;
+//    avgZ = acceleration.z;
     
     // Compute phi
     double phi = atan(avgZ/pow(pow(avgX, 2.0)+pow(avgY, 2.0), 0.5))*RADS_TO_DEGREES;

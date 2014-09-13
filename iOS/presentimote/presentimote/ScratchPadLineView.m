@@ -46,7 +46,7 @@
         temp = [conversion dBToXY:CGPointMake(path[i].x, path[i].y) givenPhi:phi theta:theta andOrientation:orientation];
 //        NSLog(@"Output Path: %@", NSStringFromCGPoint(temp));
 //        NSLog(@"Output vareables %f %f %f", phi, theta, orientation);
-        CGContextAddLineToPoint(c, temp.x, temp.y);
+        CGContextAddLineToPoint(c, temp.x , temp.y);
     }
     CGContextStrokePath(c);
 }
