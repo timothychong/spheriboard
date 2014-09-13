@@ -49,18 +49,12 @@
 // Get display xy coords from db coords
 +(CGPoint) dBToXY:(CGPoint) pt givenPhi:(double) phi
             theta:(double) theta andOrientation:(double) orientation {
-    pt.x = pt.x - theta;
-    if (pt.x < 0.0) {
-        pt.x = pt.x + theta;
-    }
-    if (phi > 0.0) {
-        pt.y -= phi;
-    } else {
-        pt.y += phi;
-    }
-    double magnitude = sqrt(pow(pt.x, 2.0) + pow(pt.y, 2.0));
-    pt.x = magnitude * sin(orientation) * RADS_TO_DEGREES;
-    pt.y = magnitude * cos(orientation) * RADS_TO_DEGREES;
+    pt.x -= theta;
+    pt.y -= phi;
+    double counterClockwise = 270.0 + orientation;
+    double x = pt.x*cos(counterClockwise/RADS_TO_DEGREES) - pt.y*sin(counterClockwise/RADS_TO_DEGREES);
+    pt.y = pt.x*sin(counterClockwise/RADS_TO_DEGREES) + pt.y*cos(counterClockwise/RADS_TO_DEGREES);
+    pt.x = x;
     return [conversion getXYCoordinate:pt];
 }
 
