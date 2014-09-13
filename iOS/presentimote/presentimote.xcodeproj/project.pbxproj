@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EBB4E5819C4529600525E10 /* OrientationSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB4E5719C4529600525E10 /* OrientationSolver.m */; };
+		1EBB4E5919C4529600525E10 /* OrientationSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB4E5719C4529600525E10 /* OrientationSolver.m */; };
 		FDA0DCE019C417290041B3F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCDF19C417290041B3F7 /* main.m */; };
 		FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE219C417290041B3F7 /* AppDelegate.m */; };
 		FDA0DCE619C417290041B3F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE519C417290041B3F7 /* ViewController.m */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EBB4E5619C4529600525E10 /* OrientationSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationSolver.h; sourceTree = "<group>"; };
+		1EBB4E5719C4529600525E10 /* OrientationSolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationSolver.m; sourceTree = "<group>"; };
 		FDA0DCDA19C417290041B3F7 /* presentimote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = presentimote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDA0DCDE19C417290041B3F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDA0DCDF19C417290041B3F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 			children = (
 				FDA0DCE119C417290041B3F7 /* AppDelegate.h */,
 				FDA0DCE219C417290041B3F7 /* AppDelegate.m */,
+				1EBB4E5619C4529600525E10 /* OrientationSolver.h */,
+				1EBB4E5719C4529600525E10 /* OrientationSolver.m */,
 				FDC549F419C43AF1009A7E11 /* conversion.h */,
 				FDC549F519C43AF1009A7E11 /* conversion.m */,
 				FDC549EE19C42F86009A7E11 /* View Controller */,
@@ -259,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDC549EC19C42F5D009A7E11 /* ScratchPadView.m in Sources */,
+				1EBB4E5819C4529600525E10 /* OrientationSolver.m in Sources */,
 				FDA0DCE619C417290041B3F7 /* ViewController.m in Sources */,
 				FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */,
 				FDC549F619C43AF1009A7E11 /* conversion.m in Sources */,
@@ -272,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDA0DCFA19C4172A0041B3F7 /* presentimoteTests.m in Sources */,
+				1EBB4E5919C4529600525E10 /* OrientationSolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ScratchPadLineView.h"
+#import "OrientationSolver.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton * leftButton;
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) ScratchPadLineView * currentLine;
 
 @property (nonatomic) NSMutableArray * pathArray;
+@property (nonatomic) OrientationSolver * orientationSolver;
 
 @end
 
@@ -25,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.orientationSolver = [[OrientationSolver alloc ] init];
     self.view.delegate = self;
     self.pathArray = [NSMutableArray new];
 }
