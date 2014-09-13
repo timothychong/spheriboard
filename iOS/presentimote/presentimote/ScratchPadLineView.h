@@ -15,8 +15,13 @@
 
 @end
 
+struct luke_point {
+    double x, y;
+    double last_x, last_y;
+};
+
 @interface ScratchPadLineView : UIView {
-    CGPoint path[500];
+    struct luke_point path[500];
 }
 @property (nonatomic) int path_length;
 @property (nonatomic, weak) id <ScratchPadLineViewDelegate> delegate;

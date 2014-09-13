@@ -9,6 +9,7 @@
 #import "ScratchPadLineView.h"
 #import "conversion.h"
 
+#define K 0.97
 
 @implementation ScratchPadLineView
 
@@ -24,7 +25,7 @@
 }
 
 - (CGPoint) lastPathPixel {
-    return path[path_length - 1];
+    return CGPointMake(path[path_length - 1].x, path[path_length - 1].y);
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -41,6 +42,12 @@
     CGContextBeginPath(c);
     
     CGPoint start = [conversion dBToXY:CGPointMake(path[0].x, path[0].y) givenPhi:phi theta:theta andOrientation:orientation];
+    start.x = K * start.x + (1.0 - K) * path[0].last_x;
+    start.y = K * start.y + (1.0 - K) * path[0].last_y;
+    
+    // Save the last real xy point to  compute the new smoothed point
+    path[0].last_x = start.x;
+    path[0].last_y = start.y;
     
     CGContextMoveToPoint(c, start.x, start.y);
     CGPoint temp;
@@ -48,6 +55,12 @@
         temp = [conversion dBToXY:CGPointMake(path[i].x, path[i].y) givenPhi:phi theta:theta andOrientation:orientation];
 //        NSLog(@"Output Path: %@", NSStringFromCGPoint(temp));
 //        NSLog(@"Output vareables %f %f %f", phi, theta, orientation);
+        temp.x = K * temp.x + (1.0 - K) * path[i].last_x;
+        temp.y = K * temp.y + (1.0 - K) * path[i].last_y;
+        
+        // Save the last real xy point to  compute the new smoothed point
+        path[0].last_x = temp.x;
+        path[0].last_y = temp.y;
         CGContextAddLineToPoint(c, temp.x , temp.y);
     }
     CGContextStrokePath(c);
@@ -83,7 +96,8 @@
     [array enumerateObjectsUsingBlock:^(id value, NSUInteger idx, BOOL *stop) {
         CGPoint p;
         [value getValue:&p];
-        path[idx] = p;
+        path[idx].x = p.x;
+        path[idx].y = p.y;
         path_length ++;
         
     }];
@@ -95,7 +109,7 @@
 
 -(CGPoint)getPathAtIndex:(int) index
 {
-    return path[index];
+    return CGPointMake(path[index].x, path[index].y);
 }
 
 @end

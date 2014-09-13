@@ -78,6 +78,18 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
+    ScratchPadLineView * lineView = self.currentLine;
+    NSMutableArray * array = [[NSMutableArray alloc]initWithCapacity:lineView.path_length];
+    for( int i = 0; i < self.currentLine.path_length; i++) {
+        CGPoint point = [lineView getPathAtIndex:i];
+        NSDictionary * dict = @{
+                                @"x" : [NSNumber numberWithFloat:point.x],
+                                @"y" : [NSNumber numberWithFloat:point.y]
+                                };
+        [array addObject:dict];
+        
+    }
+    [self.socketIO sendEvent:@"savedrawing" withData: @{@"points":array}];
     
     self.dont_collect = false;
 }
