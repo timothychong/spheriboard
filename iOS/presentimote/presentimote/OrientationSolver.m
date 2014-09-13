@@ -27,8 +27,8 @@ double avgX;
 double avgY;
 double avgZ;
 
-double phi_;
-double theta_;
+//double phi_;
+//double theta_;
 double phi_top;
 double theta_top;
 
@@ -128,23 +128,26 @@ double theta_top;
     while (theta < 0.0) {
         theta += 360.0;
     }
-    if (phi_ > 45.0) {
-        phi_ = 45.0;
-    } else if (phi_ < -45.0) {
-        phi_ = -45.0;
+    if (phi > 45.0) {
+        phi = 45.0;
+    } else if (phi < -45.0) {
+        phi = -45.0;
     }
-    phi_ = phi;
-    theta_ = theta;
+    
+    double orientation = self.currentHeading - _originalOrientation - theta;
+    [self.delegate OrientationSolver:self didReceiveNewAccelerometerDataWithTheta:theta andPhi:phi andOrientation:orientation];
+//    phi_ = phi;
+//    theta_ = theta;
 }
 
-- (void) getAccelerationDataPhi:(double*)phi andTheta:(double*)theta
-    andOrientation:(double *)orientation {
-    *phi = phi_;
-    *theta = theta_;
-    *orientation = self.currentHeading - _originalOrientation - theta_;
-    NSLog(@"%@",[NSString stringWithFormat:@"Phi: %.2f",phi_]);
-    NSLog(@"%@",[NSString stringWithFormat:@"Theta: %.2f",theta_]);
-}
+//- (void) getAccelerationDataPhi:(double*)phi andTheta:(double*)theta
+//    andOrientation:(double *)orientation {
+//    *phi = phi_;
+//    *theta = theta_;
+//    *orientation = self.currentHeading - _originalOrientation - theta_;
+//    NSLog(@"%@",[NSString stringWithFormat:@"Phi: %.2f",phi_]);
+//    NSLog(@"%@",[NSString stringWithFormat:@"Theta: %.2f",theta_]);
+//}
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {
