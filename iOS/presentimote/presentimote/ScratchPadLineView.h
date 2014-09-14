@@ -18,12 +18,13 @@
 struct luke_point {
     double x, y;
     double last_x, last_y;
+    bool not_first_time;
 };
 
 @interface ScratchPadLineView : UIView {
     struct luke_point path[500];
 }
-@property (nonatomic) int path_length;
+@property (nonatomic) int tim_path_length;
 @property (nonatomic, weak) id <ScratchPadLineViewDelegate> delegate;
 
 -(void) addPointWithX: (float) x andY: (float) y;

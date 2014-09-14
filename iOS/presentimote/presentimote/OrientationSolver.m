@@ -9,7 +9,7 @@
 #import "OrientationSolver.h"
 
 #define RADS_TO_DEGREES 57.2957795
-#define K 0.93
+#define K 0.9
 
 @interface OrientationSolver ()
 
@@ -24,6 +24,7 @@
 double avgX;
 double avgY;
 double avgZ;
+double gyroY;
 
 //double phi_;
 //double theta_;
@@ -162,7 +163,25 @@ double theta_top;
             
         }
     }
+
+// if (abs((self._currentHeading - newHeading.trueHeading)/self._currentHeading) > 0.01) {
+//    double oldHeading = self._currentHeading;
+//    while (oldHeading > 360.0) {
+//        oldHeading -= 360.0;
+//    }
+//    while (oldHeading < 0.0){
+//        oldHeading += 360.0;
+//    }
+//    double nh = newHeading.trueHeading;
+//    while (nh > 360.0) {
+//        nh -= 360.0;
+//    }
+//    while (nh < 0.0){
+//        nh += 360.0;
+//    }
+//    self._currentHeading = 0.7 * oldHeading + 0.3 * nh;
     self._currentHeading = newHeading.trueHeading;
+  //  }
 }
 
 @end
