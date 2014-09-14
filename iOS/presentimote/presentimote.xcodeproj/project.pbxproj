@@ -63,7 +63,7 @@
 		FDC549EA19C42F5D009A7E11 /* ScratchPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchPadView.h; sourceTree = "<group>"; };
 		FDC549EB19C42F5D009A7E11 /* ScratchPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchPadView.m; sourceTree = "<group>"; };
 		FDC549F419C43AF1009A7E11 /* conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conversion.h; sourceTree = "<group>"; };
-		FDC549F519C43AF1009A7E11 /* conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = conversion.m; sourceTree = "<group>"; };
+		FDC549F519C43AF1009A7E11 /* conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = conversion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

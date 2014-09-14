@@ -12,14 +12,16 @@
 
 #define RADS_TO_DEGREES 57.2957795
 
+#define SCALAR 0.0528
+
 @implementation conversion
 
 +(CGPoint)stCenterCoordinate:(CGPoint)pt
 {
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    
-    return CGPointMake(pt.x / width * 16.9 - 8.45, -(pt.y / height  * 30 - 15));
+   
+    return CGPointMake(pt.x / width * width*SCALAR - width*SCALAR/2, -(pt.y / height  * height*SCALAR - height*SCALAR/2));
 }
 
 +(CGPoint)getXYCoordinate:(CGPoint)pt
@@ -27,7 +29,7 @@
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
-    return CGPointMake((pt.x + 8.45) * width / 16.9 , (-pt.y + 15) * height  / 30);
+    return CGPointMake((pt.x + width*SCALAR/2) * width / (width*SCALAR) , (-pt.y + height*SCALAR/2) * height  / (height*SCALAR));
 }
 
 // Get db coodinates from xy on phone

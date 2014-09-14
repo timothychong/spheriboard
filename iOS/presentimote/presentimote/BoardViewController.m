@@ -234,6 +234,11 @@
             }
             [self.view insertSubview:newLine belowSubview:self.leaveButton];
             [self.pathArray addObject:newLine];
+        } else if ([name isEqualToString:SOCKET_EVENT_NAME_DRAWING_ERASED]) {
+            for (UIView * view in self.pathArray) {
+                [view removeFromSuperview];
+            }
+            self.pathArray = [NSMutableArray new];
         }
     } else {
         NSLog(@"Erorr trying to convert packet from packet.data to an nsdictionary");

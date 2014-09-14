@@ -12,5 +12,6 @@
 #define SOCKET_HOST @"54.165.102.139"
 #define SOCKET_HOST_PORT 42069
 #define SOCKET_EVENT_NAME_DRAWING @"drawing"
+#define SOCKET_EVENT_NAME_DRAWING_ERASED @"drawingerased"
 
 #endif
