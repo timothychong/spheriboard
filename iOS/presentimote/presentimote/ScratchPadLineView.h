@@ -15,14 +15,24 @@
 
 @end
 
-@interface ScratchPadLineView : UIView {
-    CGPoint path[500];
-    int path_length;
-}
+struct luke_point {
+    double x, y;
+    double last_x, last_y;
+    bool not_first_time;
+};
 
+@interface ScratchPadLineView : UIView {
+    struct luke_point path[500];
+}
+@property (nonatomic) int tim_path_length;
 @property (nonatomic, weak) id <ScratchPadLineViewDelegate> delegate;
+@property (nonatomic) NSArray * colors;
+@property (nonatomic) char color;
 
 -(void) addPointWithX: (float) x andY: (float) y;
+-(void) addPointWithDBX: (float) x andY: (float) y;
 -(void)setPath:(NSMutableArray *)array;
 
+-(CGPoint)getPathAtIndex:(int) index;
+-(char)getColor;
 @end

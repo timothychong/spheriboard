@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="socket.io.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link href='//fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
+
+
+<script>
+$( document ).ready(function() {
+    $('#channel-modal').modal('show');
+    var button = document.getElementById('btn-download');
+	button.addEventListener('click', function (e) {
+    	var dataURL = tempCanvas.toDataURL('image/png');
+    	var oImgElement = document.createElement("a");
+		$(oImgElement).attr('href', dataURL);
+		$(oImgElement).attr('download', 'download.png');
+		oImgElement.click();
+	});
+});
+
+
+var socket = new io.connect('http://54.165.102.139:42069'); 
+
+socket.on('connect', function() {
+    console.log('Client has connected to the server!');
+	
+});
+
+function submitformkey(event) {
+            event = event || window.event;
+            var key = event.keyCode;
+            if (key == 13) {
+                  event.preventDefault();
+                  $("#channel-modal").modal('hide');
+                  chan = $("#input-channel-id").val();
+                  socket.emit("subscribe", { channel: chan, 'uid': 'download'});
+                  $("#channel").text(chan);
+ 		}
+}
+
+function submitform(event) {
+                  $("#channel-modal").modal('hide');
+                  chan = $("#input-channel-id").val();
+                  socket.emit("subscribe", { channel: chan, 'uid': 'download'});
+                  $("#channel").text(chan);
+}
+
+drawings = [];
+numdrawings = -1;
+var tempCanvas;
+var chan;
+socket.on('drawing', function(drawing) {
+	points = [];
+	var minx;
+	var miny;
+	var maxx;
+	var maxy;
+	for (i=0; i<drawing.points.length; i++) {
+		drawing.points[i].x *= 10;
+		drawing.points[i].y *= 10;
+	}
+	for (i=0; i<drawing.points.length; i++) {
+		if (i==0) {
+			minx = drawing.points[i].x;
+			miny = drawing.points[i].y;
+			maxx = drawing.points[i].x;
+			maxy = drawing.points[i].y;
+		} else {
+			if (drawing.points[i].x < minx) {
+				minx = drawing.points[i].x;
+			}
+			if (drawing.points[i].y < miny) {
+				miny = drawing.points[i].y;
+			}
+			if (drawing.points[i].x > maxx) {
+				maxx = drawing.points[i].x;
+			}
+			if (drawing.points[i].y > maxy) {
+				maxy = drawing.points[i].y;
+			}
+		}
+		points.push(drawing.points[i]);
+	}
+	drawings.push({'max_x': maxx, 'max_y': maxy, 'min_x': minx, 'min_y': miny, 'points': points, 'color': drawing.color});
+	console.log('drawing pushed');
+	if (numdrawings == drawings.length) {
+		drawfinalimage();
+	}
+});
+
+socket.on('xferdone', function(data) {
+	console.log('xfer done: ' + data.numdrawings);
+	numdrawings = data.numdrawings;
+	if (numdrawings == drawings.length) {
+		drawfinalimage();
+	}
+});
+
+socket.on('drawingerased', function(data) {
+	if (data.channel == chan) {
+		numdrawings = -1;
+		drawings = [];
+		drawfinalimage();
+	}
+});
+
+function drawfinalimage() {
+	if (tempCanvas)
+		document.body.removeChild(tempCanvas);
+	console.log('drawing:' + drawings.length);
+	var minx;
+	var miny;
+	var maxx;
+	var maxy;
+	for (i=0; i<drawings.length; i++) {
+		console.log(i);
+		if (i==0) {
+			minx = drawings[i].min_x;
+			miny = drawings[i].min_y;
+			maxx = drawings[i].max_x;
+			maxy = drawings[i].max_y;
+		} else {
+			if (drawings[i].min_x < minx) {
+				minx = drawings[i].min_x;
+			}
+			if (drawings[i].min_y < miny) {
+				miny = drawings[i].min_y;
+			}
+			if (drawings[i].max_x > maxx) {
+				maxx = drawings[i].max_x;
+			}
+			if (drawings[i].max_y > maxy) {
+				maxy = drawings[i].max_y;
+			}
+		}
+	}
+	console.log('x: ' + drawings.length);
+	for (i=0; i<drawings.length; i++) {
+		for (j = 0; j < drawings[i].points.length; j++) {
+			drawings[i].points[j].x -= minx;
+			drawings[i].points[j].y -= miny;
+		}
+	}
+	maxx -= minx;
+	maxy -= miny;
+	canvas = document.createElement("canvas");
+	canvas.width = maxx + 10;
+	canvas.height = maxy + 10;
+	ctx = canvas.getContext('2d');
+	ctx.lineCap = "round";
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	for (i=0; i<drawings.length; i++) {
+		drawing = drawings[i];
+		if (drawing.color == 1) {
+			col = 'blue';
+		} else if (drawing.color == 2) {
+			col = 'red';
+		} else if (drawing.color == 3) {
+			col = 'green';
+		} else if (drawing.color == 4) {
+			col = 'orange';
+		} else if (drawing.color == 5) {
+			col = 'purple';
+		} else {
+			col = 'black';
+		}
+		ctx.strokeStyle = col;
+		if (drawing.points.length <= 0)
+			continue;
+		ctx.beginPath();
+		point = drawing.points[0];
+		cx = point.x;
+		cy = point.y;
+		ctx.moveTo(cx, cy);
+		for (j = 1; j < drawing.points.length; j++) {
+			point = drawing.points[j];
+			ctx.lineTo(point.x, point.y);
+		}
+		ctx.stroke()
+	}
+	tempCanvas = document.createElement("canvas");
+	if (canvas.height < window.innerWidth) {
+		tempCanvas.style["padding-left"] = 0;
+		tempCanvas.style["padding-right"] = 0;
+		tempCanvas.style["margin-left"] = "auto";
+		tempCanvas.style["margin-right"] = "auto";
+		tempCanvas.style["display"] = "block";
+	}
+	tempCanvas.style["margin-top"] = "50px";
+	tempCanvas.width = canvas.height + 10;
+	tempCanvas.height = canvas.width + 10;
+	tempCtx = tempCanvas.getContext("2d");
+
+	tempCtx.translate(canvas.height + 5, canvas.width + 5);
+	tempCtx.scale(-1, 1);
+	tempCtx.rotate(270*Math.PI/180);
+
+	tempCtx.drawImage(canvas,0,0);
+
+	document.body.appendChild(tempCanvas);
+	drawings = [];
+	numdrawings = -1;
+}
+
+</script>
+
+<style>
+#input-channel-id {
+display: block;
+float: none;
+width: auto;
+margin: 0 5%;
+font-size: 16px;
+padding: 15px 0;
+box-shadow: none;
+border: none;
+overflow: hidden;
+width: 90%;
+font-weight: 400;
+font-smoothing: antialiased !important;
+-webkit-font-smoothing: antialiased !important;
+-moz-font-smoothing: antialiased !important;
+-o-font-smoothing: antialiased !important;
+outline:none;
+}
+
+h3 {
+font-size: 13px;
+font-weight: 700 !important;
+font-family: "Raleway" !important;
+font-smoothing: antialiased !important;
+-webkit-font-smoothing: antialiased !important;
+-moz-font-smoothing: antialiased !important;
+-o-font-smoothing: antialiased !important;
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+
+.modal-header {
+padding: 10px 15px 8px;
+text-align: center;
+box-shadow: none !important;
+background: #f5f5f5;
+border: none;
+border-radius: 3px 3px 0 0;
+}
+
+.modal-header {
+padding: 9px 15px !important;
+border-bottom: 1px solid #eee;
+}
+.modal-footer {
+padding: 14px 15px 15px;
+margin-bottom: 0;
+text-align: right;
+background-color: #f5f5f5;
+border-top: 1px solid #ddd;
+-webkit-border-radius: 0 0 6px 6px;
+-moz-border-radius: 0 0 6px 6px;
+border-radius: 0 0 6px 6px;
+-webkit-box-shadow: inset 0 1px 0 #ffffff;
+-moz-box-shadow: inset 0 1px 0 #ffffff;
+box-shadow: inset 0 1px 0 #ffffff;
+}
+.modal-footer, .modal-header {
+padding: 10px 15px 8px;
+box-shadow: none !important;
+background: #f5f5f5;
+border: none;
+border-radius: 3px 3px 3px 3px !important;
+}
+.modal-body {
+position: relative;
+padding: 0px;
+}
+.modal-header h3 {
+margin: 0;
+line-height: 30px;
+}
+button {
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+}
+#btn-download {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+.navbar-header {
+	background-image: url('logo.png');
+	background-repeat: no-repeat;
+	background-position-y: 7px;
+	padding-left:45px;
+	margin-left:5px;
+}
+.navbar {
+	min-height: 52px;
+	height: 52px;
+}
+.navbar-brand {
+	font-size: 20px !important;
+}
+.channel-text {
+	height: 50px;
+	padding: 17px 17px;
+	font-size: 14px;
+	color: #777;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Sphir</a>
+    </div>
+    <div class="navbar-right channel-text">
+        <span id="channel"></span>
+    </div>
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="modal fade" id="channel-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3>Channel selection</h3>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="input-channel-id" placeholder="Channel code" class="input input-large" onkeypress="submitformkey(event)" autofocus />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="submitform(event)">View</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="btn-download">
+<a href="#" class="button">Download</a>
+</div>
+</body>
+</html>
