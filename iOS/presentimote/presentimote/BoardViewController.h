@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARView.h"
 #import "ScratchPadView.h"
 #import <socket.IO/SocketIO.h>
 #import "OrientationSolver.h"
@@ -19,6 +20,8 @@
 @property (nonatomic) NSTimer    *timer;
 @property (nonatomic) NSString * roomCode;
 @property (weak, nonatomic) IBOutlet UIButton *leaveButton;
+
+@property (nonatomic) ARView * arView;
 
 @end
 
