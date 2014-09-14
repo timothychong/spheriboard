@@ -30,6 +30,8 @@
 
 @implementation ViewController
 
+@synthesize timer;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.socketIO = [[SocketIO alloc]initWithDelegate:self];
@@ -42,6 +44,8 @@
     self.pathArray = [NSMutableArray new];
     
     self.dont_collect = false;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(displayAll) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,7 +94,6 @@
         
     }
     [self.socketIO sendEvent:@"savedrawing" withData: @{@"points":array}];
-    
     self.dont_collect = false;
 }
 
@@ -147,6 +150,9 @@
         self.cur_phi = phi;
         self.cur_orientation = orientation;
     }
+}
+
+- (void)displayAll {
     for( ScratchPadLineView * path in self.pathArray) {
         [path setNeedsDisplay];
     }
