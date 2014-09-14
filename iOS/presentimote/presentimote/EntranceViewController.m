@@ -46,9 +46,9 @@
 //        }];
 //    }];
 }
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.textField resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
 }
 
