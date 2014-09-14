@@ -18,6 +18,7 @@
 struct luke_point {
     double x, y;
     double last_x, last_y;
+    bool not_first_time;
 };
 
 @interface ScratchPadLineView : UIView {

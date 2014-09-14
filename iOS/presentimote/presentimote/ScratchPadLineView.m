@@ -9,7 +9,7 @@
 #import "ScratchPadLineView.h"
 #import "conversion.h"
 
-#define K 0.85
+#define K 0.86
 
 @implementation ScratchPadLineView
 
@@ -45,12 +45,16 @@
 //    CGContextBeginPath(c);
     
     CGPoint start = [conversion dBToXY:CGPointMake(path[0].x, path[0].y) givenPhi:phi theta:theta andOrientation:orientation];
-//    start.x = K * start.x + (1.0 - K) * path[0].last_x;
-//    start.y = K * start.y + (1.0 - K) * path[0].last_y;
-//    
-//    // Save the last real xy point to  compute the new smoothed point
-//    path[0].last_x = start.x;
-//    path[0].last_y = start.y;
+    if (path[0].not_first_time) {
+        start.x = K * start.x + (1.0 - K) * path[0].last_x;
+        start.y = K * start.y + (1.0 - K) * path[0].last_y;
+    } else {
+        path[0].not_first_time = true;
+    }
+    
+    // Save the last real xy point to  compute the new smoothed point
+    path[0].last_x = start.x;
+    path[0].last_y = start.y;
     [uipath moveToPoint:CGPointMake(start.x, start.y)];
     
 //    CGContextMoveToPoint(c, start.x, start.y);
@@ -59,12 +63,16 @@
         temp = [conversion dBToXY:CGPointMake(path[i].x, path[i].y) givenPhi:phi theta:theta andOrientation:orientation];
 //        NSLog(@"Output Path: %@", NSStringFromCGPoint(temp));
 //        NSLog(@"Output vareables %f %f %f", phi, theta, orientation);
-        temp.x = K * temp.x + (1.0 - K) * path[i].last_x;
-        temp.y = K * temp.y + (1.0 - K) * path[i].last_y;
+        if (path[i].not_first_time) {
+            temp.x = K * temp.x + (1.0 - K) * path[i].last_x;
+            temp.y = K * temp.y + (1.0 - K) * path[i].last_y;
+        } else {
+            path[0].not_first_time = true;
+        }
         
         // Save the last real xy point to  compute the new smoothed point
-        path[0].last_x = temp.x;
-        path[0].last_y = temp.y;
+        path[i].last_x = temp.x;
+        path[i].last_y = temp.y;
         [uipath addLineToPoint:CGPointMake(temp.x, temp.y)];
         
 //        CGContextAddLineToPoint(c, temp.x , temp.y);
