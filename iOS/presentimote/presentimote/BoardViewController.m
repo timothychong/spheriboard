@@ -55,12 +55,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
+-(void) viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    ARView *arView = [[ARView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:arView];
-//    [arView start];
+    [super viewDidAppear:animated];
+    
+    [self.arView start];
 }
 
 

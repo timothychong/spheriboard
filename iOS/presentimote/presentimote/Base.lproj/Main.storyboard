@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -182,6 +182,10 @@
                                     <action selector="camera:" destination="kXs-1v-PBZ" eventType="touchUpInside" id="buu-67-nqD"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VfD-T0-So9" customClass="ARView">
+                                <rect key="frame" x="102" y="122" width="382" height="397"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -197,6 +201,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="EZv-U2-hff"/>
                     <connections>
+                        <outlet property="arView" destination="VfD-T0-So9" id="UvO-3o-ccG"/>
                         <outlet property="cameraButton" destination="QOK-2Y-4eG" id="zEc-Dk-gDJ"/>
                         <outlet property="eraseButton" destination="ikJ-PR-i9o" id="qgJ-g1-xSz"/>
                         <outlet property="leaveButton" destination="Xsb-0S-AOV" id="4IG-G3-P4c"/>

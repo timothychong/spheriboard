@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *eraseButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 
-@property (nonatomic) ARView * arView;
+@property (weak, nonatomic) IBOutlet ARView * arView;
 
 @end
 
