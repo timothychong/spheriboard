@@ -9,7 +9,7 @@
 #import "ScratchPadLineView.h"
 #import "conversion.h"
 
-#define K 0.86
+#define K 0.85
 
 @implementation ScratchPadLineView
 
