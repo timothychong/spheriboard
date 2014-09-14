@@ -196,4 +196,15 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+- (IBAction)erase:(id)sender {
+}
+
+- (IBAction)camera:(id)sender {
+}
+
+- (IBAction)random:(id)sender {
+}
+
+
 @end
