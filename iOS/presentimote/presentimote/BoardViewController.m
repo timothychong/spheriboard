@@ -68,6 +68,19 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     
+    if (CGRectContainsPoint( self.leaveButton.frame , touchLocation)) {
+        if (CGRectContainsPoint(self.quitButton.frame, touchLocation)) {
+            [self leaveChannel:nil];
+        } else if (CGRectContainsPoint(self.eraseButton.frame, touchLocation)) {
+            [self erase:nil];
+        } else if (CGRectContainsPoint(self.cameraButton.frame, touchLocation)){
+            [self camera:nil];
+        }
+        
+        return;
+        
+    }
+    
     ScratchPadLineView * newLine = [[ScratchPadLineView alloc]initWithFrame:self.view.frame];
     newLine.delegate = self;
     

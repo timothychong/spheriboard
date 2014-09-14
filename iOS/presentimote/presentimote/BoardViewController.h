@@ -20,6 +20,9 @@
 @property (nonatomic) NSTimer    *timer;
 @property (nonatomic) NSString * roomCode;
 @property (weak, nonatomic) IBOutlet UIButton *leaveButton;
+@property (weak, nonatomic) IBOutlet UIButton *quitButton;
+@property (weak, nonatomic) IBOutlet UIButton *eraseButton;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 
 @property (nonatomic) ARView * arView;
 

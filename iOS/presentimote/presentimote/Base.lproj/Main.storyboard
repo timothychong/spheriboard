@@ -122,7 +122,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xsb-0S-AOV">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="109"/>
-                                <color key="backgroundColor" red="0.98938382059999996" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -198,7 +197,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="EZv-U2-hff"/>
                     <connections>
+                        <outlet property="cameraButton" destination="QOK-2Y-4eG" id="zEc-Dk-gDJ"/>
+                        <outlet property="eraseButton" destination="ikJ-PR-i9o" id="qgJ-g1-xSz"/>
                         <outlet property="leaveButton" destination="Xsb-0S-AOV" id="4IG-G3-P4c"/>
+                        <outlet property="quitButton" destination="5t1-Vv-zBj" id="QiY-Fu-C5H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbI-9K-ULH" userLabel="First Responder" sceneMemberID="firstResponder"/>
