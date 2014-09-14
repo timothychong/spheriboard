@@ -9,7 +9,8 @@ var Point = new mongoose.Schema({
 var Drawing = mongoose.model('drawing', new mongoose.Schema({
 	channel  :  String,
 	owner  :  String,
-	points  :  [Point]
+	points  :  [Point],
+	color : { type: Number, default: 0 }
 }));
 
 clients = {};
@@ -27,10 +28,10 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('savedrawing', function(data){
 		console.log('save called!');
-
 		var drawing = new Drawing({'channel': socket['session'].channel, 
 								   'owner': socket.session['uid'], 
-								   'points': data.points});
+								   'points': data.points,
+								   'color': parseInt(data.color)});
 
 		drawing.save(function (err) {
 		  if (err) {
@@ -72,7 +73,7 @@ io.sockets.on('connection', function (socket) {
   					points.push({x: drawings[i].points[j].x,
   								 y: drawings[i].points[j].y});
   				}
-	  			socket.emit('drawing', {'points': points});
+	  			socket.emit('drawing', {'points': points, 'color': drawings[i].color});
   				console.log(points);
   			}
   			if (drawings.length > 0)
