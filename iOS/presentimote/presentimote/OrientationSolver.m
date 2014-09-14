@@ -165,7 +165,22 @@ double theta_top;
     }
 
 // if (abs((self._currentHeading - newHeading.trueHeading)/self._currentHeading) > 0.01) {
-        self._currentHeading = 0.7 * self._currentHeading + 0.3 * newHeading.trueHeading;
+//    double oldHeading = self._currentHeading;
+//    while (oldHeading > 360.0) {
+//        oldHeading -= 360.0;
+//    }
+//    while (oldHeading < 0.0){
+//        oldHeading += 360.0;
+//    }
+//    double nh = newHeading.trueHeading;
+//    while (nh > 360.0) {
+//        nh -= 360.0;
+//    }
+//    while (nh < 0.0){
+//        nh += 360.0;
+//    }
+//    self._currentHeading = 0.7 * oldHeading + 0.3 * nh;
+    self._currentHeading = newHeading.trueHeading;
   //  }
 }
 

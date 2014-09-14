@@ -58,6 +58,7 @@
 {
     [super viewWillAppear:animated];
     ARView *arView = [[ARView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:arView];
     [arView start];
 }
 

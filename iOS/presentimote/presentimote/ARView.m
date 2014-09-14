@@ -45,7 +45,7 @@
 	captureView = [[UIView alloc] initWithFrame:self.bounds];
 	captureView.bounds = self.bounds;
 	[self addSubview:captureView];
-	[self sendSubviewToBack:captureView];
+//	[self sendSubviewToBack:captureView];
 }
 
 - (void)startCameraPreview
