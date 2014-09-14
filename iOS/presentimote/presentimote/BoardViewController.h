@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARView.h"
 #import "ScratchPadView.h"
 #import <socket.IO/SocketIO.h>
 #import "OrientationSolver.h"
 #import "ScratchPadLineView.h"
 
 @interface BoardViewController : UIViewController <ScratchPadViewDelegate, SocketIODelegate, OrientationSolverDelegate, ScratchPadLineViewDelegate> {
-
-NSTimer *timer;
+    NSTimer *timer;
 }
 
-@property (nonatomic, retain) NSTimer    *timer;
+@property (nonatomic) NSTimer    *timer;
+@property (nonatomic) NSString * roomCode;
+
+@property (nonatomic) ARView * arView;
 
 @end
 

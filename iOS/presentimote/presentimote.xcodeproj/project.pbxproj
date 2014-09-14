@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EA6997119C5556700211613 /* ARView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA6997019C5556700211613 /* ARView.m */; };
+		1EA6997219C5556700211613 /* ARView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA6997019C5556700211613 /* ARView.m */; };
 		1EBB4E5819C4529600525E10 /* OrientationSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB4E5719C4529600525E10 /* OrientationSolver.m */; };
 		1EBB4E5919C4529600525E10 /* OrientationSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB4E5719C4529600525E10 /* OrientationSolver.m */; };
 		C6CF63316FDE43BA8BE0FED7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 627B2F2DE1614089B4E06221 /* libPods.a */; };
-		FD26E69519C48F4800844C28 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD26E69419C48F4800844C28 /* PersistenceManager.m */; };
+		FD62AC6A19C5503F00550721 /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD62AC6919C5503F00550721 /* EntranceViewController.m */; };
 		FDA0DCE019C417290041B3F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCDF19C417290041B3F7 /* main.m */; };
 		FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE219C417290041B3F7 /* AppDelegate.m */; };
 		FDA0DCE619C417290041B3F7 /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE519C417290041B3F7 /* BoardViewController.m */; };
@@ -34,13 +36,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EA6996F19C5556700211613 /* ARView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARView.h; sourceTree = "<group>"; };
+		1EA6997019C5556700211613 /* ARView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARView.m; sourceTree = "<group>"; };
 		1EBB4E5619C4529600525E10 /* OrientationSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationSolver.h; sourceTree = "<group>"; };
 		1EBB4E5719C4529600525E10 /* OrientationSolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationSolver.m; sourceTree = "<group>"; };
 		627B2F2DE1614089B4E06221 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		686BF1F17B23469B9DBFD905 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		FD26E69319C48F4800844C28 /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceManager.h; sourceTree = "<group>"; };
-		FD26E69419C48F4800844C28 /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceManager.m; sourceTree = "<group>"; };
 		FD26E69719C4A2D100844C28 /* global_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global_header.h; sourceTree = "<group>"; };
+		FD62AC6819C5503F00550721 /* EntranceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntranceViewController.h; sourceTree = "<group>"; };
+		FD62AC6919C5503F00550721 /* EntranceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntranceViewController.m; sourceTree = "<group>"; };
 		FDA0DCDA19C417290041B3F7 /* presentimote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = presentimote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDA0DCDE19C417290041B3F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDA0DCDF19C417290041B3F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -116,14 +120,13 @@
 				FDA0DCE219C417290041B3F7 /* AppDelegate.m */,
 				1EBB4E5619C4529600525E10 /* OrientationSolver.h */,
 				1EBB4E5719C4529600525E10 /* OrientationSolver.m */,
+				1EA6996F19C5556700211613 /* ARView.h */,
+				1EA6997019C5556700211613 /* ARView.m */,
 				FDC549F419C43AF1009A7E11 /* conversion.h */,
 				FDC549F519C43AF1009A7E11 /* conversion.m */,
 				FDC549EE19C42F86009A7E11 /* View Controller */,
-				FDC549FA19C43CD9009A7E11 /* Category */,
 				FDC549ED19C42F7E009A7E11 /* Views */,
 				FDA0DCE719C417290041B3F7 /* Main.storyboard */,
-				FD26E69319C48F4800844C28 /* PersistenceManager.h */,
-				FD26E69419C48F4800844C28 /* PersistenceManager.m */,
 				FDA0DCEA19C417290041B3F7 /* Images.xcassets */,
 				FDA0DCEC19C417290041B3F7 /* LaunchScreen.xib */,
 				FD26E69719C4A2D100844C28 /* global_header.h */,
@@ -172,17 +175,12 @@
 		FDC549EE19C42F86009A7E11 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FD62AC6819C5503F00550721 /* EntranceViewController.h */,
+				FD62AC6919C5503F00550721 /* EntranceViewController.m */,
 				FDA0DCE419C417290041B3F7 /* BoardViewController.h */,
 				FDA0DCE519C417290041B3F7 /* BoardViewController.m */,
 			);
 			name = "View Controller";
-			sourceTree = "<group>";
-		};
-		FDC549FA19C43CD9009A7E11 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,12 +320,13 @@
 			files = (
 				FDC549EC19C42F5D009A7E11 /* ScratchPadView.m in Sources */,
 				1EBB4E5819C4529600525E10 /* OrientationSolver.m in Sources */,
+				1EA6997119C5556700211613 /* ARView.m in Sources */,
+				FD62AC6A19C5503F00550721 /* EntranceViewController.m in Sources */,
 				FDA0DCE619C417290041B3F7 /* BoardViewController.m in Sources */,
 				FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */,
 				FDC549F619C43AF1009A7E11 /* conversion.m in Sources */,
 				FDA0DCE019C417290041B3F7 /* main.m in Sources */,
 				FDC549E919C42263009A7E11 /* ScratchPadLineView.m in Sources */,
-				FD26E69519C48F4800844C28 /* PersistenceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +336,7 @@
 			files = (
 				FDA0DCFA19C4172A0041B3F7 /* presentimoteTests.m in Sources */,
 				1EBB4E5919C4529600525E10 /* OrientationSolver.m in Sources */,
+				1EA6997219C5556700211613 /* ARView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +404,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -439,7 +439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -451,6 +451,7 @@
 			baseConfigurationReference = 686BF1F17B23469B9DBFD905 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = presentimote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -464,6 +465,7 @@
 			baseConfigurationReference = 686BF1F17B23469B9DBFD905 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = presentimote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

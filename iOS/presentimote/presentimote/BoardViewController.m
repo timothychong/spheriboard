@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Downtyne. All rights reserved.
 //
 
+#import "ARView.h"
 #import "BoardViewController.h"
 #import "ScratchPadLineView.h"
 #import "OrientationSolver.h"
@@ -53,6 +54,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    ARView *arView = [[ARView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:arView];
+    [arView start];
+}
+
 
 -(void)scratchPadView:(ScratchPadView *) view touchesBegan:(NSSet *) touches withEvent:(UIEvent *)event{
     UITouch *touch = [[event allTouches] anyObject];
@@ -83,8 +92,8 @@
     CGPoint touchLocation = [touch locationInView:self.view];
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
     ScratchPadLineView * lineView = self.currentLine;
-    NSMutableArray * array = [[NSMutableArray alloc]initWithCapacity:lineView.path_length];
-    for( int i = 0; i < self.currentLine.path_length; i++) {
+    NSMutableArray * array = [[NSMutableArray alloc]initWithCapacity:lineView.tim_path_length];
+    for( int i = 0; i < self.currentLine.tim_path_length; i++) {
         CGPoint point = [lineView getPathAtIndex:i];
         NSDictionary * dict = @{
                                 @"x" : [NSNumber numberWithFloat:point.x],
@@ -133,7 +142,7 @@
     NSUUID *oNSUUID = [[UIDevice currentDevice] identifierForVendor];
     [uid setString:[oNSUUID UUIDString]];
     
-    [self.socketIO sendEvent:@"subscribe" withData:@{@"uid": uid, @"channel" : @"testing"}];
+    [self.socketIO sendEvent:@"subscribe" withData:@{@"uid": uid, @"channel" : self.roomCode}];
 }
 
 -(void)socketIO:(SocketIO *)socket onError:(NSError *)error
