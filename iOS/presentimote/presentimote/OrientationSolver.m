@@ -10,6 +10,7 @@
 
 #define RADS_TO_DEGREES 57.2957795
 #define K 0.9
+#define KT 0.7
 
 @interface OrientationSolver ()
 
@@ -27,7 +28,7 @@ double avgZ;
 double gyroY;
 
 //double phi_;
-//double theta_;
+double theta_;
 double phi_top;
 double theta_top;
 
@@ -138,11 +139,12 @@ double theta_top;
     } else if (phi < -45.0) {
         phi = -45.0;
     }
+    // SMOOOOTHIES
+    theta_ = KT * theta_ + (1.0 - KT) * theta;
     
     double orientation = self._currentHeading - _originalOrientation - theta;
-    [self.delegate OrientationSolver:self didReceiveNewAccelerometerDataWithTheta:theta andPhi:phi andOrientation:orientation];
+    [self.delegate OrientationSolver:self didReceiveNewAccelerometerDataWithTheta:theta_ andPhi:phi andOrientation:orientation];
 //    phi_ = phi;
-//    theta_ = theta;
 }
 
 //- (void) getAccelerationDataPhi:(double*)phi andTheta:(double*)theta
