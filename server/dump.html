@@ -21,7 +21,10 @@ $( document ).ready(function() {
     var button = document.getElementById('btn-download');
 	button.addEventListener('click', function (e) {
     	var dataURL = tempCanvas.toDataURL('image/png');
-    	button.href = dataURL;
+    	var oImgElement = document.createElement("a");
+		$(oImgElement).attr('href', dataURL);
+		$(oImgElement).attr('download', 'download.png');
+		oImgElement.click();
 	});
 });
 
