@@ -31,9 +31,9 @@
                                     <constraint firstAttribute="height" constant="30" id="oc2-6C-Bf5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="DTH-fP-2Zb"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="KSy-fV-muD"/>
                                 </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="HMJ-5F-GVA">
