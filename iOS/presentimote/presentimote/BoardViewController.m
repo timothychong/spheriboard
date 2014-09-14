@@ -12,6 +12,8 @@
 #import "OrientationSolver.h"
 #import "global_header.h"
 #import <SocketIOPacket.h>
+#define MAS_SHORTHAND
+#import <Masonry/Masonry.h>
 
 @interface BoardViewController ()
 
@@ -26,6 +28,17 @@
 @property (nonatomic) double cur_phi, cur_theta, cur_orientation;
 
 @property (nonatomic) bool dont_collect;
+@property (weak, nonatomic) IBOutlet UIButton *blackButton;
+@property (weak, nonatomic) IBOutlet UIButton *blueButton;
+@property (weak, nonatomic) IBOutlet UIButton *redButton;
+@property (weak, nonatomic) IBOutlet UIButton *greenButton;
+@property (weak, nonatomic) IBOutlet UIButton *purpleButton;
+@property (weak, nonatomic) IBOutlet UIButton *orangeButton;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
+
+
+@property (nonatomic) char selectedColor;
+@property (nonatomic) BOOL colorMenuIsOpen;
 
 @end
 
@@ -48,6 +61,9 @@
     self.dont_collect = false;
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(displayAll) userInfo:nil repeats:YES];
+    [self.backgroundView makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@370);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,12 +71,76 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
+-(void) viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    ARView *arView = [[ARView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:arView];
-    [arView start];
+    [super viewDidAppear:animated];
+    [self hideColorButtons: self.blackButton];
+    
+}
+
+-(void) hideColorButtons:(id) sender
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.redButton.frame = CGRectMake(10, 8, 50, 50);
+        self.redButton.alpha = 0;
+        self.greenButton.frame = CGRectMake(10, 8, 50, 50);
+        self.greenButton.alpha = 0;
+        self.blueButton.frame = CGRectMake(10, 8, 50, 50);
+        self.blueButton.alpha = 0;
+        self.orangeButton.frame = CGRectMake(10, 8, 50, 50);
+        self.orangeButton.alpha = 0;
+        self.purpleButton.frame = CGRectMake(10, 8, 50, 50);
+        self.purpleButton.alpha = 0;
+        self.blackButton.alpha = 0;
+        [self.backgroundView updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@70);
+        }];
+        ((UIView*)sender).alpha = 100;
+    }];
+    self.colorMenuIsOpen = NO;
+}
+
+-(void) showColorButtons{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.redButton.frame = CGRectMake(10, 124, 50, 50);
+        self.redButton.alpha = 100;
+        self.greenButton.frame = CGRectMake(10, 182, 50, 50);
+        self.greenButton.alpha = 100;
+        self.blueButton.frame = CGRectMake(10, 66, 50, 50);
+        self.blueButton.alpha = 100;
+        self.orangeButton.frame = CGRectMake(10, 240, 50, 50);
+        self.orangeButton.alpha = 100;
+        self.purpleButton.frame = CGRectMake(10, 298, 50, 50);
+        self.purpleButton.alpha = 100;
+        self.blackButton.alpha = 100;
+        [self.backgroundView updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@370);
+        }];
+    }];
+    self.colorMenuIsOpen = YES;
+}
+
+-(IBAction)colorButtonClicked:(id)sender {
+    
+    if (self.colorMenuIsOpen) {
+        if (sender == self.blackButton) {
+            self.selectedColor = 0;
+        } else if (sender == self.blueButton) {
+            self.selectedColor = 1;
+        } else if (sender == self.redButton) {
+            self.selectedColor = 2;
+        } else if (sender == self.greenButton) {
+            self.selectedColor = 3;
+        } else if (sender == self.orangeButton) {
+            self.selectedColor = 4;
+        } else if (sender == self.purpleButton) {
+            self.selectedColor = 5;
+        }
+        [self hideColorButtons: sender];
+    }else {
+        [self showColorButtons];
+    }
+    
 }
 
 
@@ -68,7 +148,21 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     
+    if (CGRectContainsPoint( self.leaveButton.frame , touchLocation)) {
+        if (CGRectContainsPoint(self.quitButton.frame, touchLocation)) {
+            [self leaveChannel:nil];
+        } else if (CGRectContainsPoint(self.eraseButton.frame, touchLocation)) {
+            [self erase:nil];
+        } else if (CGRectContainsPoint(self.cameraButton.frame, touchLocation)){
+            [self camera:nil];
+        }
+        
+        return;
+        
+    }
+    
     ScratchPadLineView * newLine = [[ScratchPadLineView alloc]initWithFrame:self.view.frame];
+    newLine.color = self.selectedColor;
     newLine.delegate = self;
     
     [newLine addPointWithX:touchLocation.x andY:touchLocation.y];
@@ -101,16 +195,17 @@
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
     ScratchPadLineView * lineView = self.currentLine;
     NSMutableArray * array = [[NSMutableArray alloc]initWithCapacity:lineView.tim_path_length];
+    NSNumber *myNumber = [NSNumber numberWithInt:[lineView getColor]];
     for( int i = 0; i < self.currentLine.tim_path_length; i++) {
         CGPoint point = [lineView getPathAtIndex:i];
         NSDictionary * dict = @{
                                 @"x" : [NSNumber numberWithFloat:point.x],
-                                @"y" : [NSNumber numberWithFloat:point.y]
+                                @"y" : [NSNumber numberWithFloat:point.y],
                                 };
         [array addObject:dict];
         
     }
-    [self.socketIO sendEvent:@"savedrawing" withData: @{@"points":array}];
+    [self.socketIO sendEvent:@"savedrawing" withData: @{@"points":array, @"color":myNumber}];
     self.dont_collect = false;
     self.currentLine = nil;
 }
@@ -127,8 +222,10 @@
         if ([name isEqualToString:SOCKET_EVENT_NAME_DRAWING]) {
             NSDictionary * args = JSON[@"args"][0];
             NSArray * points = args[@"points"];
+            char color = (char) ((NSNumber *)args[@"color"]).floatValue;
             ScratchPadLineView * newLine = [[ScratchPadLineView alloc]initWithFrame:self.view.frame];
             newLine.delegate = self;
+            newLine.color = color;
             for (NSDictionary * dict in points) {
                 float x = ((NSNumber *)dict[@"x"]).floatValue;
                 float y = ((NSNumber *)dict[@"y"]).floatValue;
@@ -198,7 +295,23 @@
 
 
 - (IBAction)erase:(id)sender {
+    UIActionSheet * sheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to reomve everything in sphere?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil, nil];
+    
+    [sheet showInView:self.view];
 }
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self.socketIO sendEvent:@"erasedrawing" withData: @{}];
+        for (UIView * view in self.pathArray) {
+            [view removeFromSuperview];
+        }
+        self.pathArray = [NSMutableArray new];
+    }
+}
+
+
 
 - (IBAction)camera:(id)sender {
 }

@@ -13,7 +13,6 @@
 		1EBB4E5919C4529600525E10 /* OrientationSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB4E5719C4529600525E10 /* OrientationSolver.m */; };
 		C6CF63316FDE43BA8BE0FED7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 627B2F2DE1614089B4E06221 /* libPods.a */; };
 		FD62AC6A19C5503F00550721 /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD62AC6919C5503F00550721 /* EntranceViewController.m */; };
-		FD76AE7A19C565D2005770DA /* ColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD76AE7919C565D2005770DA /* ColorPickerView.m */; };
 		FDA0DCE019C417290041B3F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCDF19C417290041B3F7 /* main.m */; };
 		FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE219C417290041B3F7 /* AppDelegate.m */; };
 		FDA0DCE619C417290041B3F7 /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE519C417290041B3F7 /* BoardViewController.m */; };
@@ -46,8 +45,6 @@
 		FD26E69719C4A2D100844C28 /* global_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global_header.h; sourceTree = "<group>"; };
 		FD62AC6819C5503F00550721 /* EntranceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntranceViewController.h; sourceTree = "<group>"; };
 		FD62AC6919C5503F00550721 /* EntranceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntranceViewController.m; sourceTree = "<group>"; };
-		FD76AE7819C565D2005770DA /* ColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerView.h; sourceTree = "<group>"; };
-		FD76AE7919C565D2005770DA /* ColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerView.m; sourceTree = "<group>"; };
 		FDA0DCDA19C417290041B3F7 /* presentimote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = presentimote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDA0DCDE19C417290041B3F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDA0DCDF19C417290041B3F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -171,8 +168,6 @@
 				FDC549EB19C42F5D009A7E11 /* ScratchPadView.m */,
 				FDC549E719C42263009A7E11 /* ScratchPadLineView.h */,
 				FDC549E819C42263009A7E11 /* ScratchPadLineView.m */,
-				FD76AE7819C565D2005770DA /* ColorPickerView.h */,
-				FD76AE7919C565D2005770DA /* ColorPickerView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -332,7 +327,6 @@
 				FDC549F619C43AF1009A7E11 /* conversion.m in Sources */,
 				FDA0DCE019C417290041B3F7 /* main.m in Sources */,
 				FDC549E919C42263009A7E11 /* ScratchPadLineView.m in Sources */,
-				FD76AE7A19C565D2005770DA /* ColorPickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
