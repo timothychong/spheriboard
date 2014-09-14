@@ -9,7 +9,7 @@
 #import "ScratchPadLineView.h"
 #import "conversion.h"
 
-#define K 0.86
+#define K 0.85
 
 @implementation ScratchPadLineView
 
@@ -34,6 +34,7 @@
         return;
     }
     UIBezierPath * uipath = [[UIBezierPath alloc] init];
+    [uipath setLineWidth:4.0];
     
 //    CGContextRef c = UIGraphicsGetCurrentContext();
 //    CGFloat red[4] = {1.0f, 0.0f, 0.0f, 1.0f};
@@ -67,7 +68,7 @@
             temp.x = K * temp.x + (1.0 - K) * path[i].last_x;
             temp.y = K * temp.y + (1.0 - K) * path[i].last_y;
         } else {
-            path[0].not_first_time = true;
+            path[i].not_first_time = true;
         }
         
         // Save the last real xy point to  compute the new smoothed point
