@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Downtyne. All rights reserved.
 //
 
+#import "ARView.h"
 #import "BoardViewController.h"
 #import "ScratchPadLineView.h"
 #import "OrientationSolver.h"
@@ -51,6 +52,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    ARView *arView = [[ARView alloc] initWithFrame:self.view.frame];
+    [arView start];
 }
 
 

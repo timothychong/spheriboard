@@ -19,5 +19,7 @@ NSTimer *timer;
 
 @property (nonatomic, retain) NSTimer    *timer;
 
+@property (nonatomic) ARView * arView;
+
 @end
 
