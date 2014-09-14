@@ -51,6 +51,17 @@ io.sockets.on('connection', function (socket) {
 		delete clients[socket.id];
 	});
 
+	socket.on('erasedrawing', function(topic){
+		sel = { 'channel': socket['session'].channel };
+		Drawing.find(sel).remove().exec(function(err, msg) {
+			if (err) { return console.error('ERROR: ' + err); }
+			console.log('deleted drawings for ' + socket['session'].channel);
+		});
+		for (client in clients) {
+			clients[client].emit('drawingerased', {'channel': socket['session'].channel });
+		}
+	});
+
 	socket.getdrawings = function(data, loopback) {
 		console.log('triggered: ' + socket['session'].did + ' in ' + socket['session'].channel);
 		sel = { 'channel': socket['session'].channel, '_id': { $gt: socket['session'].did } };
