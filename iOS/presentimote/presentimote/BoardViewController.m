@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Downtyne. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "BoardViewController.h"
 #import "ScratchPadLineView.h"
 #import "OrientationSolver.h"
 #import "global_header.h"
 #import <SocketIOPacket.h>
 
-@interface ViewController ()
+@interface BoardViewController ()
 
 @property (nonatomic) SocketIO *socketIO;
 
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation ViewController
+@implementation BoardViewController
 
 @synthesize timer;
 

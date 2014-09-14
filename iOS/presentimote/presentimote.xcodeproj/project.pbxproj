@@ -13,7 +13,7 @@
 		FD26E69519C48F4800844C28 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD26E69419C48F4800844C28 /* PersistenceManager.m */; };
 		FDA0DCE019C417290041B3F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCDF19C417290041B3F7 /* main.m */; };
 		FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE219C417290041B3F7 /* AppDelegate.m */; };
-		FDA0DCE619C417290041B3F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE519C417290041B3F7 /* ViewController.m */; };
+		FDA0DCE619C417290041B3F7 /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA0DCE519C417290041B3F7 /* BoardViewController.m */; };
 		FDA0DCE919C417290041B3F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDA0DCE719C417290041B3F7 /* Main.storyboard */; };
 		FDA0DCEB19C417290041B3F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDA0DCEA19C417290041B3F7 /* Images.xcassets */; };
 		FDA0DCEE19C417290041B3F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDA0DCEC19C417290041B3F7 /* LaunchScreen.xib */; };
@@ -46,8 +46,8 @@
 		FDA0DCDF19C417290041B3F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FDA0DCE119C417290041B3F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDA0DCE219C417290041B3F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FDA0DCE419C417290041B3F7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FDA0DCE519C417290041B3F7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FDA0DCE419C417290041B3F7 /* BoardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
+		FDA0DCE519C417290041B3F7 /* BoardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
 		FDA0DCE819C417290041B3F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDA0DCEA19C417290041B3F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FDA0DCED19C417290041B3F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -172,8 +172,8 @@
 		FDC549EE19C42F86009A7E11 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FDA0DCE419C417290041B3F7 /* ViewController.h */,
-				FDA0DCE519C417290041B3F7 /* ViewController.m */,
+				FDA0DCE419C417290041B3F7 /* BoardViewController.h */,
+				FDA0DCE519C417290041B3F7 /* BoardViewController.m */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -322,7 +322,7 @@
 			files = (
 				FDC549EC19C42F5D009A7E11 /* ScratchPadView.m in Sources */,
 				1EBB4E5819C4529600525E10 /* OrientationSolver.m in Sources */,
-				FDA0DCE619C417290041B3F7 /* ViewController.m in Sources */,
+				FDA0DCE619C417290041B3F7 /* BoardViewController.m in Sources */,
 				FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */,
 				FDC549F619C43AF1009A7E11 /* conversion.m in Sources */,
 				FDA0DCE019C417290041B3F7 /* main.m in Sources */,
