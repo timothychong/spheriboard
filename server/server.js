@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/spheriboarddev14');
+mongoose.connect('mongodb://localhost/spheriboarddev21');
 
 var Point = new mongoose.Schema({
     x: Number,
@@ -51,16 +51,21 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.getdrawings = function(data, loopback) {
-		console.log('triggered: ' + socket['session'].did);
+		console.log('triggered: ' + socket['session'].did + ' in ' + socket['session'].channel);
 		sel = { 'channel': socket['session'].channel, '_id': { $gt: socket['session'].did } };
 		if (!loopback) {
 			sel = { 'channel': socket['session'].channel, '_id': { $gt: socket['session'].did }, 'owner' : { $ne : socket['session'].uid } };
 			console.log('(loopback)');
 		}
+		if (socket['session'].uid == 'download') {
+			delete sel['_id'];
+		}
 		Drawing.find(sel).exec(function(err, drawings) {
   			if (err) { return console.error('ERROR: ' + err) }
-  			if (drawings.length < 0)
+  			if (drawings.length <= 0) {
+  				console.log('no drawings');
   				return
+  			}
   			for (i=0; i < drawings.length; i++) {
   				points = [];
   				for (j=0; j < drawings[i].points.length; j++) {
@@ -72,6 +77,7 @@ io.sockets.on('connection', function (socket) {
   			}
   			if (drawings.length > 0)
 	  			socket['session'].did = drawings[drawings.length - 1]['_id'];
+	  		socket.emit('xferdone', {numdrawings: drawings.length});
 		});
 	};
 });
