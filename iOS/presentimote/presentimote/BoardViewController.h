@@ -13,7 +13,7 @@
 #import "OrientationSolver.h"
 #import "ScratchPadLineView.h"
 
-@interface BoardViewController : UIViewController <ScratchPadViewDelegate, SocketIODelegate, OrientationSolverDelegate, ScratchPadLineViewDelegate> {
+@interface BoardViewController : UIViewController <ScratchPadViewDelegate, SocketIODelegate, OrientationSolverDelegate, ScratchPadLineViewDelegate, UIActionSheetDelegate> {
     NSTimer *timer;
 }
 

@@ -20,7 +20,6 @@
     if (self = [super initWithFrame:frame]) {
         tim_path_length = 0;
         self.backgroundColor = [UIColor clearColor];
-    }
     self.color = 5;
     self.colors = [[NSArray alloc] initWithObjects:
                    [UIColor blackColor],
@@ -30,6 +29,7 @@
                    [UIColor orangeColor],
                    [UIColor purpleColor],
                    nil];
+    }
     return self;
 }
 
