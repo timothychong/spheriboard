@@ -26,10 +26,13 @@ struct luke_point {
 }
 @property (nonatomic) int tim_path_length;
 @property (nonatomic, weak) id <ScratchPadLineViewDelegate> delegate;
+@property (nonatomic) NSArray * colors;
+@property (nonatomic) char color;
 
 -(void) addPointWithX: (float) x andY: (float) y;
 -(void) addPointWithDBX: (float) x andY: (float) y;
 -(void)setPath:(NSMutableArray *)array;
 
 -(CGPoint)getPathAtIndex:(int) index;
+-(char)getColor;
 @end

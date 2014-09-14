@@ -59,7 +59,7 @@
     [super viewWillAppear:animated];
     ARView *arView = [[ARView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:arView];
-    [arView start];
+//    [arView start];
 }
 
 
@@ -93,16 +93,17 @@
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
     ScratchPadLineView * lineView = self.currentLine;
     NSMutableArray * array = [[NSMutableArray alloc]initWithCapacity:lineView.tim_path_length];
+    NSNumber *myNumber = [NSNumber numberWithInt:[lineView getColor]];
     for( int i = 0; i < self.currentLine.tim_path_length; i++) {
         CGPoint point = [lineView getPathAtIndex:i];
         NSDictionary * dict = @{
                                 @"x" : [NSNumber numberWithFloat:point.x],
-                                @"y" : [NSNumber numberWithFloat:point.y]
+                                @"y" : [NSNumber numberWithFloat:point.y],
                                 };
         [array addObject:dict];
         
     }
-    [self.socketIO sendEvent:@"savedrawing" withData: @{@"points":array}];
+    [self.socketIO sendEvent:@"savedrawing" withData: @{@"points":array, @"color":myNumber}];
     self.dont_collect = false;
 }
 
@@ -118,8 +119,10 @@
         if ([name isEqualToString:SOCKET_EVENT_NAME_DRAWING]) {
             NSDictionary * args = JSON[@"args"][0];
             NSArray * points = args[@"points"];
+            char color = (char) ((NSNumber *)args[@"color"]).floatValue;
             ScratchPadLineView * newLine = [[ScratchPadLineView alloc]initWithFrame:self.view.frame];
             newLine.delegate = self;
+            newLine.color = color;
             for (NSDictionary * dict in points) {
                 float x = ((NSNumber *)dict[@"x"]).floatValue;
                 float y = ((NSNumber *)dict[@"y"]).floatValue;
