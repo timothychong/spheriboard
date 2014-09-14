@@ -13,11 +13,11 @@
 #import "ScratchPadLineView.h"
 
 @interface BoardViewController : UIViewController <ScratchPadViewDelegate, SocketIODelegate, OrientationSolverDelegate, ScratchPadLineViewDelegate> {
-
-NSTimer *timer;
+    NSTimer *timer;
 }
 
-@property (nonatomic, retain) NSTimer    *timer;
+@property (nonatomic) NSTimer    *timer;
+@property (nonatomic) NSString * roomCode;
 
 @end
 

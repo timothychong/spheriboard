@@ -133,7 +133,7 @@
     NSUUID *oNSUUID = [[UIDevice currentDevice] identifierForVendor];
     [uid setString:[oNSUUID UUIDString]];
     
-    [self.socketIO sendEvent:@"subscribe" withData:@{@"uid": uid, @"channel" : @"testing"}];
+    [self.socketIO sendEvent:@"subscribe" withData:@{@"uid": uid, @"channel" : self.roomCode}];
 }
 
 -(void)socketIO:(SocketIO *)socket onError:(NSError *)error
