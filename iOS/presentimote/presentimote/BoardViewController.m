@@ -295,7 +295,7 @@
 
 
 - (IBAction)erase:(id)sender {
-    UIActionSheet * sheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to reomve everything in sphere?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil, nil];
+    UIActionSheet * sheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to remove everything in sphere?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil, nil];
     
     [sheet showInView:self.view];
 }
