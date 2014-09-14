@@ -4,15 +4,15 @@
 
 <script src="socket.io.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<link href='http://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link href='//fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
 
 
 <script>
@@ -78,7 +78,7 @@ socket.on('drawing', function(drawing) {
 		}
 		points.push(drawing.points[i]);
 	}
-	drawings.push({'max_x': maxx, 'max_y': maxy, 'min_x': minx, 'min_y': miny, 'points': points});
+	drawings.push({'max_x': maxx, 'max_y': maxy, 'min_x': minx, 'min_y': miny, 'points': points, 'color': drawing.color});
 	console.log('drawing pushed');
 	if (numdrawings == drawings.length) {
 		drawfinalimage();
@@ -140,8 +140,21 @@ function drawfinalimage() {
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	for (i=0; i<drawings.length; i++) {
-		console.log(i);
 		drawing = drawings[i];
+		if (drawing.color == 1) {
+			col = 'blue';
+		} else if (drawing.color == 2) {
+			col = 'red';
+		} else if (drawing.color == 3) {
+			col = 'green';
+		} else if (drawing.color == 4) {
+			col = 'orange';
+		} else if (drawing.color == 5) {
+			col = 'purple';
+		} else {
+			col = 'black';
+		}
+		ctx.strokeStyle = col;
 		if (drawing.points.length <= 0)
 			continue;
 		ctx.beginPath();
@@ -259,7 +272,7 @@ button {
 	font-weight: 400;
 }
 #btn-download {
-	position: absolute;
+	position: fixed;
 	right: 0;
 	bottom: 0;
 	margin-right: 10px;
@@ -284,6 +297,8 @@ button {
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<a href="#" class="button" id="btn-download">Download</a>
+<div id="btn-download">
+<a href="#" class="button">Download</a>
+</div>
 </body>
 </html>
