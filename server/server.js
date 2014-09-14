@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/spheriboard');
+mongoose.connect('mongodb://localhost/spheriboarddev14');
 
 var Point = new mongoose.Schema({
     x: Number,
@@ -14,7 +14,7 @@ var Drawing = mongoose.model('drawing', new mongoose.Schema({
 
 clients = {};
 
-var io = require('socket.io').listen(42069, {log: false});
+var io = require('socket.io').listen(42069, {log: true});
 io.sockets.on('connection', function (socket) {
 	socket.on('subscribe', function(data){
 		socket.join(data.channel);
@@ -26,9 +26,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('savedrawing', function(data){
-		for (client in clients) {
-				clients[client].getdrawings(data, false);
-		}
+		console.log('save called!');
 
 		var drawing = new Drawing({'channel': socket['session'].channel, 
 								   'owner': socket.session['uid'], 
@@ -38,8 +36,13 @@ io.sockets.on('connection', function (socket) {
 		  if (err) {
 		  	console.log('error saving drawing: ' + err);
 		  }
-		  console.log('saved drawing');
+			for (client in clients) {
+					console.log('updating client ' + client);
+					clients[client].getdrawings(data, false);
+			}
 		});
+
+
 	});
 	 
 	socket.on('disconnect', function(topic){
@@ -48,10 +51,12 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.getdrawings = function(data, loopback) {
-		console.log('triggered');
+		console.log('triggered: ' + socket['session'].did);
 		sel = { 'channel': socket['session'].channel, '_id': { $gt: socket['session'].did } };
-		if (!loopback)
+		if (!loopback) {
 			sel = { 'channel': socket['session'].channel, '_id': { $gt: socket['session'].did }, 'owner' : { $ne : socket['session'].uid } };
+			console.log('(loopback)');
+		}
 		Drawing.find(sel).exec(function(err, drawings) {
   			if (err) { return console.error('ERROR: ' + err) }
   			if (drawings.length < 0)
