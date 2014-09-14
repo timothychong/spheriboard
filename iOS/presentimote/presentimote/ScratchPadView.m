@@ -15,6 +15,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.delegate scratchPadView:self touchesBegan:touches withEvent:event];
+    
 }
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

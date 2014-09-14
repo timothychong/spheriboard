@@ -15,14 +15,20 @@
 
 @end
 
-@interface ScratchPadLineView : UIView {
-    CGPoint path[500];
-    int path_length;
-}
+struct luke_point {
+    double x, y;
+    double last_x, last_y;
+};
 
+@interface ScratchPadLineView : UIView {
+    struct luke_point path[500];
+}
+@property (nonatomic) int path_length;
 @property (nonatomic, weak) id <ScratchPadLineViewDelegate> delegate;
 
 -(void) addPointWithX: (float) x andY: (float) y;
+-(void) addPointWithDBX: (float) x andY: (float) y;
 -(void)setPath:(NSMutableArray *)array;
 
+-(CGPoint)getPathAtIndex:(int) index;
 @end

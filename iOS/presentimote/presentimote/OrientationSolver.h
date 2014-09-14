@@ -17,7 +17,7 @@
 
 @end
 
-@interface OrientationSolver : NSObject <CLLocationManagerDelegate>
+@interface OrientationSolver : NSObject <CLLocationManagerDelegate> 
 
 @property (nonatomic, weak) id <OrientationSolverDelegate> delegate;
 
