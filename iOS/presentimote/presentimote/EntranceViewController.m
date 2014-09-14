@@ -46,13 +46,11 @@
 //        }];
 //    }];
 }
--(void)textFieldDidEndEditing:(UITextField *)textField
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [self.logo updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.view.top).offset(150);
-//        }];
-//    }];
+    [self.textField resignFirstResponder];
+    return YES;
 }
 
 @end
+

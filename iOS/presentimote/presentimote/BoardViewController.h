@@ -18,6 +18,7 @@
 
 @property (nonatomic) NSTimer    *timer;
 @property (nonatomic) NSString * roomCode;
+@property (weak, nonatomic) IBOutlet UIButton *leaveButton;
 
 @end
 

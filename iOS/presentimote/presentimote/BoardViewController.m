@@ -32,6 +32,7 @@
 
 @synthesize timer;
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.socketIO = [[SocketIO alloc]initWithDelegate:self];
@@ -57,12 +58,13 @@
 -(void)scratchPadView:(ScratchPadView *) view touchesBegan:(NSSet *) touches withEvent:(UIEvent *)event{
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
+    
     ScratchPadLineView * newLine = [[ScratchPadLineView alloc]initWithFrame:self.view.frame];
     newLine.delegate = self;
     
     [newLine addPointWithX:touchLocation.x andY:touchLocation.y];
     self.currentLine = newLine;
-    [self.view addSubview:newLine];
+    [self.view insertSubview:newLine belowSubview:self.leaveButton];
     [self.pathArray addObject:newLine];
     
     self.dont_collect = true;
@@ -70,6 +72,9 @@
 
 -(void)scratchPadView:(ScratchPadView *) view touchesMoved:(NSSet *) touches withEvent:(UIEvent *)event{
     
+    if (!self.currentLine) {
+        return;
+    }
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
@@ -79,6 +84,9 @@
 
 -(void)scratchPadView:(ScratchPadView *)view touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!self.currentLine) {
+        return;
+    }
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     [self.currentLine addPointWithX:touchLocation.x andY:touchLocation.y];
@@ -95,6 +103,7 @@
     }
     [self.socketIO sendEvent:@"savedrawing" withData: @{@"points":array}];
     self.dont_collect = false;
+    self.currentLine = nil;
 }
 
 -(void)socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
@@ -117,7 +126,7 @@
                 NSLog(@"%f %f", x, y);
                 [newLine addPointWithDBX:x andY:y];
             }
-            [self.view addSubview:newLine];
+            [self.view insertSubview:newLine belowSubview:self.leaveButton];
             [self.pathArray addObject:newLine];
         }
     } else {
@@ -139,6 +148,10 @@
 -(void)socketIO:(SocketIO *)socket onError:(NSError *)error
 {
     NSLog(@"SocketIO error: %@", error);
+}
+-(void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - OrientationSolver
@@ -166,4 +179,12 @@
     *theta = self.cur_theta;
     *orientation = self.cur_orientation;
 }
+
+#pragma mark - buttons
+
+- (IBAction)leaveChannel:(id)sender {
+    [self.socketIO disconnect];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
