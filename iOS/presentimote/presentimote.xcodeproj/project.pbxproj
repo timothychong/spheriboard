@@ -119,7 +119,6 @@
 				FDC549F419C43AF1009A7E11 /* conversion.h */,
 				FDC549F519C43AF1009A7E11 /* conversion.m */,
 				FDC549EE19C42F86009A7E11 /* View Controller */,
-				FDC549FA19C43CD9009A7E11 /* Category */,
 				FDC549ED19C42F7E009A7E11 /* Views */,
 				FDA0DCE719C417290041B3F7 /* Main.storyboard */,
 				FDA0DCEA19C417290041B3F7 /* Images.xcassets */,
@@ -176,13 +175,6 @@
 				FDA0DCE519C417290041B3F7 /* BoardViewController.m */,
 			);
 			name = "View Controller";
-			sourceTree = "<group>";
-		};
-		FDC549FA19C43CD9009A7E11 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
