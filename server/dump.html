@@ -39,18 +39,21 @@ function submitformkey(event) {
             if (key == 13) {
                   event.preventDefault();
                   $("#channel-modal").modal('hide');
-                  socket.emit("subscribe", { channel: $("#input-channel-id").val(), 'uid': 'download'});
+                  chan = $("#input-channel-id").val();
+                  socket.emit("subscribe", { channel: chan, 'uid': 'download'});
  		}
 }
 
 function submitform(event) {
                   $("#channel-modal").modal('hide');
-                  socket.emit("subscribe", { channel: $("#input-channel-id").val(), 'uid': 'download'});
+                  chan = $("#input-channel-id").val();
+                  socket.emit("subscribe", { channel: chan, 'uid': 'download'});
 }
 
 drawings = [];
 numdrawings = -1;
 var tempCanvas;
+var chan;
 socket.on('drawing', function(drawing) {
 	points = [];
 	var minx;
@@ -94,6 +97,14 @@ socket.on('xferdone', function(data) {
 	console.log('xfer done: ' + data.numdrawings);
 	numdrawings = data.numdrawings;
 	if (numdrawings == drawings.length) {
+		drawfinalimage();
+	}
+});
+
+socket.on('drawingerased', function(data) {
+	if (data.channel == chan) {
+		numdrawings = -1;
+		drawings = [];
 		drawfinalimage();
 	}
 });
