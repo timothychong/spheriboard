@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARView.h"
 #import "ScratchPadView.h"
 #import <socket.IO/SocketIO.h>
 #import "OrientationSolver.h"

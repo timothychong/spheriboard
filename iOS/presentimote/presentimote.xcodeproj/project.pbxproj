@@ -321,6 +321,7 @@
 				FDC549EC19C42F5D009A7E11 /* ScratchPadView.m in Sources */,
 				1EBB4E5819C4529600525E10 /* OrientationSolver.m in Sources */,
 				1EA6997119C5556700211613 /* ARView.m in Sources */,
+				FD62AC6A19C5503F00550721 /* EntranceViewController.m in Sources */,
 				FDA0DCE619C417290041B3F7 /* BoardViewController.m in Sources */,
 				FDA0DCE319C417290041B3F7 /* AppDelegate.m in Sources */,
 				FDC549F619C43AF1009A7E11 /* conversion.m in Sources */,
