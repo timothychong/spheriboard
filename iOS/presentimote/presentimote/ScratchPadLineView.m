@@ -21,6 +21,15 @@
         tim_path_length = 0;
         self.backgroundColor = [UIColor clearColor];
     }
+    self.color = 5;
+    self.colors = [[NSArray alloc] initWithObjects:
+                   [UIColor blackColor],
+                   [UIColor blueColor],
+                   [UIColor redColor],
+                   [UIColor greenColor],
+                   [UIColor orangeColor],
+                   [UIColor purpleColor],
+                   nil];
     return self;
 }
 
@@ -36,6 +45,9 @@
     UIBezierPath * uipath = [[UIBezierPath alloc] init];
     [uipath setLineWidth:4.0];
     
+    UIColor * color = self.colors[self.color];
+    [color setStroke];
+    [color setFill];
 //    CGContextRef c = UIGraphicsGetCurrentContext();
 //    CGFloat red[4] = {1.0f, 0.0f, 0.0f, 1.0f};
 //    CGContextSetStrokeColor(c, red);
@@ -123,6 +135,11 @@
 -(CGPoint)getPathAtIndex:(int) index
 {
     return CGPointMake(path[index].x, path[index].y);
+}
+
+-(char)getColor
+{
+    return self.color;
 }
 
 @end

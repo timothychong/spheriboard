@@ -33,7 +33,7 @@ socket.on('connect', function() {
 	
 });
 
-function submitform(event) {
+function submitformkey(event) {
             event = event || window.event;
             var key = event.keyCode;
             if (key == 13) {
@@ -41,6 +41,11 @@ function submitform(event) {
                   $("#channel-modal").modal('hide');
                   socket.emit("subscribe", { channel: $("#input-channel-id").val(), 'uid': 'download'});
  		}
+}
+
+function submitform(event) {
+                  $("#channel-modal").modal('hide');
+                  socket.emit("subscribe", { channel: $("#input-channel-id").val(), 'uid': 'download'});
 }
 
 drawings = [];
@@ -133,8 +138,8 @@ function drawfinalimage() {
 	maxx -= minx;
 	maxy -= miny;
 	canvas = document.createElement("canvas");
-	canvas.width = maxx;
-	canvas.height = maxy;
+	canvas.width = maxx + 10;
+	canvas.height = maxy + 10;
 	ctx = canvas.getContext('2d');
 	ctx.lineCap = "round";
 	ctx.fillStyle = "#FFFFFF";
@@ -176,11 +181,11 @@ function drawfinalimage() {
 		tempCanvas.style["margin-right"] = "auto";
 		tempCanvas.style["display"] = "block";
 	}
-	tempCanvas.width = canvas.height;
-	tempCanvas.height = canvas.width;
+	tempCanvas.width = canvas.height + 10;
+	tempCanvas.height = canvas.width + 10;
 	tempCtx = tempCanvas.getContext("2d");
 
-	tempCtx.translate(canvas.height, canvas.width);
+	tempCtx.translate(canvas.height + 5, canvas.width + 5);
 	tempCtx.scale(-1, 1);
 	tempCtx.rotate(270*Math.PI/180);
 
@@ -289,10 +294,10 @@ button {
         <h3>Channel selection</h3>
       </div>
       <div class="modal-body">
-        <input type="text" id="input-channel-id" placeholder="Channel code" class="input input-large" onkeypress="submitform(event)" autofocus />
+        <input type="text" id="input-channel-id" placeholder="Channel code" class="input input-large" onkeypress="submitformkey(event)" autofocus />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="submitroom()">View</button>
+        <button type="button" class="btn btn-primary" onclick="submitform(event)">View</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
