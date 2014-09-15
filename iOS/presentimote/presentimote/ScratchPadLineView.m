@@ -9,7 +9,8 @@
 #import "ScratchPadLineView.h"
 #import "conversion.h"
 
-#define K 0.85
+#define K 0.75
+#define JITTER 15
 
 @implementation ScratchPadLineView
 
@@ -59,8 +60,12 @@
     
     CGPoint start = [conversion dBToXY:CGPointMake(path[0].x, path[0].y) givenPhi:phi theta:theta andOrientation:orientation];
     if (path[0].not_first_time) {
-        start.x = K * start.x + (1.0 - K) * path[0].last_x;
-        start.y = K * start.y + (1.0 - K) * path[0].last_y;
+        // Only change drawing location if not jitter
+        if (sqrt(pow(fabs(start.x-path[0].last_x), 2.0)+
+                 pow(fabs(start.y-path[0].last_y), 2.0)) > JITTER) {
+            start.x = K * start.x + (1.0 - K) * path[0].last_x;
+            start.y = K * start.y + (1.0 - K) * path[0].last_y;
+        }
     } else {
         path[0].not_first_time = true;
     }
@@ -77,8 +82,12 @@
 //        NSLog(@"Output Path: %@", NSStringFromCGPoint(temp));
 //        NSLog(@"Output vareables %f %f %f", phi, theta, orientation);
         if (path[i].not_first_time) {
-            temp.x = K * temp.x + (1.0 - K) * path[i].last_x;
-            temp.y = K * temp.y + (1.0 - K) * path[i].last_y;
+            // Only change drawing location if not jitter
+            if (sqrt(pow(fabs(temp.x-path[i].last_x), 2.0)+
+                     pow(fabs(temp.y-path[i].last_y), 2.0)) > JITTER) {
+                temp.x = K * temp.x + (1.0 - K) * path[i].last_x;
+                temp.y = K * temp.y + (1.0 - K) * path[i].last_y;
+            }
         } else {
             path[i].not_first_time = true;
         }

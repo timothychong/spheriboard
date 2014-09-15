@@ -234,6 +234,7 @@
 				TargetAttributes = {
 					FDA0DCD919C417290041B3F7 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = M6HLH3KVN2;
 					};
 					FDA0DCF219C417290041B3F7 = {
 						CreatedOnToolsVersion = 6.0;
