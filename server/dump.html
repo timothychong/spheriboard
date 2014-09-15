@@ -44,6 +44,7 @@ function submitformkey(event) {
                   $("#channel-modal").modal('hide');
                   chan = $("#input-channel-id").val();
                   socket.emit("subscribe", { channel: chan, 'uid': 'download'});
+                  $("#channel").text(chan);
  		}
 }
 
@@ -51,6 +52,7 @@ function submitform(event) {
                   $("#channel-modal").modal('hide');
                   chan = $("#input-channel-id").val();
                   socket.emit("subscribe", { channel: chan, 'uid': 'download'});
+                  $("#channel").text(chan);
 }
 
 drawings = [];
@@ -195,6 +197,7 @@ function drawfinalimage() {
 		tempCanvas.style["margin-right"] = "auto";
 		tempCanvas.style["display"] = "block";
 	}
+	tempCanvas.style["margin-top"] = "50px";
 	tempCanvas.width = canvas.height + 10;
 	tempCanvas.height = canvas.width + 10;
 	tempCtx = tempCanvas.getContext("2d");
@@ -297,9 +300,40 @@ button {
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
+.navbar-header {
+	background-image: url('logo.png');
+	background-repeat: no-repeat;
+	background-position-y: 7px;
+	padding-left:45px;
+	margin-left:5px;
+}
+.navbar {
+	min-height: 52px;
+	height: 52px;
+}
+.navbar-brand {
+	font-size: 20px !important;
+}
+.channel-text {
+	height: 50px;
+	padding: 17px 17px;
+	font-size: 14px;
+	color: #777;
+}
 </style>
 </head>
 <body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Sphir</a>
+    </div>
+    <div class="navbar-right channel-text">
+        <span id="channel"></span>
+    </div>
+  </div><!-- /.container-fluid -->
+</nav>
 <div class="modal fade" id="channel-modal">
   <div class="modal-dialog">
     <div class="modal-content">
